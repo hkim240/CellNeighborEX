@@ -3,13 +3,10 @@ CellContact is a MATLAB-based statistical framework to detect cell contact-depen
 
 CellContact performs four steps as follows:
 
-STEP1: Converting log-normalized data to z-values
-
-STEP2: Creating the null model of artificial heterotypic spots
-
-STEP3: Finding differentially expressed genes (DEGs)
-
-SETP4: Plotting heatmaps 
+STEP1: Converting log-normalized data to z-values<br>
+STEP2: Creating the null model of artificial heterotypic spots<br>
+STEP3: Finding differentially expressed genes (DEGs)<br>
+SETP4: Plotting heatmaps<br>
 
 
 # Citation
