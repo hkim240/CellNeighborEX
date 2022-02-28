@@ -10,6 +10,5 @@ STEP2: Creating the null model of artificial heterotypic spots<br>
 STEP3: Finding differentially expressed genes (DEGs)<br>
 SETP4: Plotting heatmaps<br> 
 
-
 # Citation
 Hyobin Kim, Cecilia Lövkvist, Patrick C.N. Martin, Junil Kim, Kyoung Jae Won, Detecting Cell Contact-dependent Gene Expression from Spatial Transcriptomics Data, bioRxiv, 2022.
