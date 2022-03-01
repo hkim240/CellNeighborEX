@@ -51,8 +51,7 @@
 % 'celltype1+celltype1_gene.txt'
 % 'celltype2+celltype2_gene.txt'
 %
-% Heatmaps: expression of cell contact-dependent genes & cell type markers
-% in homotypic and heterotypic beads
+% Heatmaps: expression of cell contact-dependent genes & cell type markers in homotypic and heterotypic beads
 % 'celltype1+celltype2.pdf'
 % 
 % The output files above are saved in "output/celltype1+celltype2/"
