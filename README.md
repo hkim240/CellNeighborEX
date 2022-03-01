@@ -7,7 +7,7 @@ The figure below shows the workflow for detecting cell contact-dependent gene ex
 
 (1) Spatial transcriptomics data: Slide-seq V2 data are used. <br>
 (2) Cell type deconvolution: The cell type mixture of the individual beads in Slide-seq are decomposed by RCTD. <br>
-(3) Cell contact-dependent gene expresson analysis: DEGs between the heterotypic and homotypic beads are identified by CellContact. <br>
+(3) Cell contact-dependent gene expresson analysis: DEGs are identified by CellContact. <br>
 (4) Spatial validation: The expression of the DEGs are visualized via spatial mapping.<br>
 
 The figure below shows how to create a null model of aritificial heterotypic beads.
