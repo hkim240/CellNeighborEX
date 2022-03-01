@@ -33,7 +33,7 @@
 %
 % The details of the input files are described below the command lines.
 % "celltype1" and "celltype2" refer to respective cell types in mouse 
-% embryo and hippocampus. The number of the heterotypic beads of
+% embryo and hippocampus. Here, the number of the heterotypic beads of
 % celltype1+celltype2 is greater than or equal to 30.
 %
 %
