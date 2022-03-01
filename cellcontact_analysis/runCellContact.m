@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% CellContact is a MATLAB-based statistical framework to detect cell 
+% CellContact is a statistical framework to detect cell 
 % contact-dependent gene expression. This is a new framework to analyze 
-% spatial transcriptomics (ST) data using spatial beads composed of muliple
+% spatial transcriptomics (ST) data using spatial beads composed of multiple
 % cell types, especially for Slide-seq data with 10 µm resolution. 
 %
 %
@@ -33,8 +33,9 @@
 %
 % The details of the input files are described below the command lines.
 % "celltype1" and "celltype2" refer to respective cell types in mouse 
-% embryo and hippocampus. Here, the number of the heterotypic beads of
-% celltype1+celltype2 is greater than or equal to 30.
+% embryo and hippocampus. For all heterotypic pairs, each sample size is 
+% greater than or equal to 30 (i.e., # of the heterotypic beads of
+% celltype1+celltype2 >= 30).
 %
 %
 % [OUTPUT]
