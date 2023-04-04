@@ -1,26 +1,45 @@
-# CellContact
-CellContact is a statistical framework to detect cell contact-dependent gene expression. This is a new framework to analyze spatial transcriptomics (ST) data using spatial beads composed of multiple cell types, especially for Slide-seq data with 10 µm resolution. 
+# CellNeighborEX
+<p align="justify">CellNeighborEX is a computational approach to identify genes up-regulated or down-regulated by immediate neighbors from spatial transcriptomics (ST) data. It works for both image-based and NGS-based ST data. For image-based ST data where exact cell locations are available, CellNeighborEX uses various algorithms including Delaunay triangulation and KNN to find immediate neighbors. For NGS-based ST data where exact cell locations are not available, CellNeighborEX leverages the mixture of transcriptomes in each spot. CellNeighborEX dissects cells or spots based on the cell types of the immediate neighbors. Carrying out differential expression analysis for the categorized cells or spots, CellNeighborEX detects neighbor-dependent genes. The expression of neighbor-dependent genes is validated in the spatial context.</p> 
 
-The figure below shows the workflow for detecting cell contact-dependent gene expression.
+The figure below shows the workflow of CellNeighborEX:
 
-<img width="1426" alt="Fig 1a" src="https://user-images.githubusercontent.com/99720939/156026752-0f3dd260-3c00-48fb-974b-76d89e7b22ea.png">
+![Fig 1](https://user-images.githubusercontent.com/99720939/229945240-2c9a2ef9-2566-496f-9981-0823cd95b813.png)
 
-(1) Spatial transcriptomics data: Slide-seq V2 data are used. <br>
-(2) Cell type deconvolution: The cell type mixture of the individual beads in Slide-seq are decomposed by RCTD. <br>
-(3) Cell contact-dependent gene expresson analysis: DEGs are identified by CellContact. <br>
-(4) Spatial validation: The expression of the DEGs are visualized via spatial mapping.<br>
+# Running CellNeighborEX
+CellNeighborEX was implemented in Python and Matlab. The scripts and input data files have been uploaded to the following folders:
 
-The figure below shows how to create a null model of aritificial heterotypic beads.
+**(1) Python/seqFISH_neighbor**
 
-![Suppl_Fig 1](https://user-images.githubusercontent.com/99720939/156159727-6fe693aa-ce23-4760-9506-8d6bdde4cb37.png)
+- get the information of neighboring cells in the mouse embryo seqFISH data (output: seqFISH_neiInfo.csv)
+- extract cells that have the same cell type or one different cell type as the cell type of immediate neighbors)  (output: seqFISH_embryo.csv)
 
-The statistical significance of the DEGs is confirmed through the null model. The process is implemented in CellContact. Specifically, CellContact performs four steps as follows:
+**(2) Python/categorization**
 
-STEP1: Converting log-normalized data to z-values <br>
-STEP2: Creating the null model of artificial heterotypic spots <br>
-STEP3: Finding differentially expressed genes (DEGs) <br>
-SETP4: Plotting heatmaps <br> 
+- categorize cells or spots based on the cell types of immediate neighbors (output: index_.csv, matchComb_.csv, neiCombUnique_.csv, prop_.csv)
+- For seqFISH data, seqFISH_embryo.csv obtained by (1) was used as input.
+- For Slide-seq data, result files obtained from deconvolution tool RCTD were used as input.
 
+**(3) Matlab/input_logdata**
+
+- generate input log data (example of output: mouseLiver_Slideseq_RCTD_top2000_plus.mat)
+
+**(4) Matlab/input_markers**
+
+- generate input marker data (example of output: liver_matchMarker_plus_selected.csv)
+
+**(5) Matlab/input_category**
+
+- generate input categorization data from four pairs of csv files obtained by (2)(example of output: HepatocyteI+HepaticStellateCell.mat)
+
+**(6) Matlab/DE_analysis**
+
+- find neighbor-dependent genes from input files obtained by (3),(4) and (5) (output: DEG_lists, expression data, heat maps)
+
+**(7) Python/visualization**
+
+- get spatial mapping plots from expression data obtained by (6) (output: neighbor-dependent gene.png)
+
+To reduce the file size, all the output files for each folder have been stored in Results.zip.
 
 # Citation
 Hyobin Kim, Cecilia Lövkvist, Patrick C.N. Martin, Junil Kim, Kyoung Jae Won, Detecting Cell Contact-dependent Gene Expression from Spatial Transcriptomics Data, bioRxiv, 2022.
