@@ -2,7 +2,7 @@
 % CellContact is a statistical framework to detect cell contact-dependent 
 % gene expression. This is a new framework to analyze spatial transcriptomics 
 % (ST) data using spatial beads composed of multiple cell types, especially 
-% for Slide-seq data with 10 µm resolution. 
+% for Slide-seq data with 10 µm resolution.. 
 %
 %
 % [ST DATA]
