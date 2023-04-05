@@ -4,7 +4,7 @@ from collections import Counter
 
 
 #### Load the pre-processed dataset: seqFISH in Slide mouse embryo 1
-path = '/Users/kimh15/Downloads/github_scripts/Python/seqFISH_neighbor/'
+path = '../Python/seqFISH_neighbor/'
 adata = sq.datasets.seqfish() # 19416 cells x 351 genes
 
 
