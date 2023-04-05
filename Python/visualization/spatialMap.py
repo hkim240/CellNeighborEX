@@ -26,7 +26,7 @@ geneR = 'Pitx1'
 
 #### Import data
 # expression data
-path_exp = '/Users/kimh15/Downloads/github_scripts/Python/visualization/'
+path_exp = '../Python/visualization/'
 dfolder = 'expression_data/Pitx1/'
 
 df_spatial_total = pd.DataFrame()
@@ -44,7 +44,7 @@ for filename in os.listdir(path_exp + dfolder):
     df_spatial_total = df_spatial_total.append(df_spatial, ignore_index=True)
 
 # cell or bead location data
-path_df = '/Users/kimh15/Downloads/github_scripts/Python/categorization/input/'
+path_df = '../Python/categorization/input/'
 
 # seqFISH dataset 
 df = pd.read_csv(path_df + 'seqFISH_embryo.csv', sep = ',', header = 0)
