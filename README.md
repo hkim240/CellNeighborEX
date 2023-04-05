@@ -23,7 +23,7 @@ CellNeighborEX was implemented in Python and Matlab. The scripts and input data 
 
 - generate input log data (example of output: mouseLiver_Slideseq_RCTD_top2000_plus.mat)
 
-**(4) Matlab/input_markers**
+**(4) Python/input_markers**
 
 - generate input marker data (example of output: liver_matchMarker_plus_selected.csv)
 
