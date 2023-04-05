@@ -3,7 +3,7 @@ from collections import Counter
 
 
 ### Importing data
-path = '/Users/kimh15/Downloads/github_scripts/Python/categorization/'
+path = '../Python/categorization/'
 
 # Choose data: seqFISH_embryo.csv, Slide-seq_embryo.csv, Slide-seq_hippocampus.csv, Slide-seq_liver_cancer.csv
 df = pd.read_csv(path + 'input/Slide-seq_hippocampus.csv', header = 0) 
