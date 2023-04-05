@@ -1,8 +1,7 @@
 import pandas as pd
 
-path = '/Users/kimh15/Downloads/github_scripts/Matlab/'
-df_top2000 = pd.read_csv(path + 'input_logdata/gene_name_top_plus.txt', sep = ' ', names=['gene'], header=None)
-df_markers = pd.read_csv(path + 'input_markers/liver_cell_type_markers.csv', sep = ',', header = 0)
+df_top2000 = pd.read_csv('../Matlab/input_logdata/gene_name_top_plus.txt', sep = ' ', names=['gene'], header=None)
+df_markers = pd.read_csv('../Python/input_markers/liver_cell_type_markers.csv', sep = ',', header = 0)
     
 
 total_markers = []
@@ -56,6 +55,6 @@ for i in range(max_len):
 
                 
 matchMarker = pd.DataFrame({'list1': total_matchMarker[0], 'list2': total_matchMarker[1]})
-matchMarker.to_csv(path + 'input_markers/output/liver_matchMarker_plus_selected.csv', index = False, header = None)
+matchMarker.to_csv('../Python/input_markers/output/liver_matchMarker_plus_selected.csv', index = False, header = None)
                                 
             
