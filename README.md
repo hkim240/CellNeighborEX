@@ -8,34 +8,34 @@ The figure below shows the workflow of CellNeighborEX:
 # Running CellNeighborEX
 CellNeighborEX was implemented in Python and Matlab. The scripts and input data files have been uploaded to the following folders:
 
-**(1) Python/seqFISH_neighbor**
+(1) <code>Python/seqFISH_neighbor</code> 
 
 - get the information of neighboring cells in the mouse embryo seqFISH data (output: seqFISH_neiInfo.csv)
 - extract cells that have the same cell type or one different cell type as the cell type of immediate neighbors)  (output: seqFISH_embryo.csv)
 
-**(2) Python/categorization**
+(2) <code>Python/categorization</code>
 
 - categorize cells or spots based on the cell types of immediate neighbors (output: index_.csv, matchComb_.csv, neiCombUnique_.csv, prop_.csv)
 - For seqFISH data, seqFISH_embryo.csv obtained by (1) was used as input.
 - For Slide-seq data, result files obtained from deconvolution tool RCTD were used as input.
 
-**(3) Matlab/input_logdata**
+(3) <code>Matlab/input_logdata</code>
 
 - generate input log data (example of output: mouseLiver_Slideseq_RCTD_top2000_plus.mat)
 
-**(4) Python/input_markers**
+(4) <code>Python/input_markers</code>
 
 - generate input marker data (example of output: liver_matchMarker_plus_selected.csv)
 
-**(5) Matlab/input_category**
+(5) <code>Matlab/input_category</code>
 
 - generate input categorization data from four pairs of csv files obtained by (2)(example of output: HepatocyteI+HepaticStellateCell.mat)
 
-**(6) Matlab/DE_analysis**
+(6) <code>Matlab/DE_analysis</code>
 
 - find neighbor-dependent genes from input files obtained by (3),(4) and (5) (output: DEG_lists, expression data, heat maps)
 
-**(7) Python/visualization**
+(7) <code>Python/visualization</code>
 
 - get spatial mapping plots from expression data obtained by (6) (output: neighbor-dependent gene.png)
 
