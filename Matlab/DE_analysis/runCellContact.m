@@ -1,5 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% [CellNeighborEX]
+% [CellNeighborEX].
 %
 % CellNeighborEX is a framework that detects neighbor-dependent genes from
 % spatial transcriptomics (ST) data. It identifies up-regulated and
