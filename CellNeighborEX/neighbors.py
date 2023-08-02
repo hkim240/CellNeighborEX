@@ -22,6 +22,7 @@ def create_dataframe(adata:anndata, coord_key:str, celltype_key:str):
     Returns:
         df (DataFrame): Constructed DataFrame with barcode, cell type, coordinates, and additional columns.
     """
+
     # Create a DataFrame for barcode
     df_barcode = pd.DataFrame(adata.obs.index, columns=["barcode"])
 
@@ -49,7 +50,6 @@ def create_dataframe(adata:anndata, coord_key:str, celltype_key:str):
 
 
 def detect_neighbors(adata:anndata, coord_key:str, type:str, knn:int, radius_value:float, delaunay:bool):
-     
     """
     Detect the spatial neighbors using squidpy and retrieve the spatial connectivity matrix.
 
@@ -64,6 +64,7 @@ def detect_neighbors(adata:anndata, coord_key:str, type:str, knn:int, radius_val
     Returns:
         matrix (sparse matrix): Spatial connectivity matrix.
     """
+
     # Detect neighbors via Delaunay triangulation, KNN, or radius
     if type == 'generic' and delaunay == True:
         sq.gr.spatial_neighbors(adata, spatial_key=coord_key, coord_type=type, delaunay=True)
@@ -80,6 +81,15 @@ def detect_neighbors(adata:anndata, coord_key:str, type:str, knn:int, radius_val
 
 
 def calculate_closest_distance(df:pd.DataFrame):
+    """
+    Calculate the closest distance between cells in the DataFrame.
+
+    Parameters:
+        df (pd.DataFrame): A pandas DataFrame containing 'x' and 'y' columns representing cell coordinates.
+
+    Returns:
+        list: A list containing the closest distance between each cell in the DataFrame.
+    """
 
     # Calcuate minimum distance between cells to determine the radius value
     points = []
@@ -97,6 +107,7 @@ def calculate_closest_distance(df:pd.DataFrame):
                 closest_distance = min(closest_distance, distance)
         closest_distances.append(closest_distance)
 
+    # Visualize the distribution of closest distances using a histogram
     fig = plt.figure(figsize=(8, 6))
     sns.histplot(closest_distances, kde=True, color='steelblue')
     plt.xlabel('Distance')
@@ -117,6 +128,7 @@ def get_neighbors(matrix:csr_matrix):
     Returns:
         neiNum (Counter): Counter object containing the count of neighbors for each cell.
     """
+    
     # Calculate the number of neighbors for each cell
     neiNum = Counter(matrix.tocoo().row)
 
@@ -137,6 +149,7 @@ def process_dataframe(df:pd.DataFrame, matrix:csr_matrix, neiNum:Counter, save:b
     Returns:
         - df (DataFrame): The processed dataframe with additional columns for neighbor information.
     """
+    
     # Add 'neiNum' column with neighbor counts
     df['neiNum'] = [neiNum[idx] for idx in range(len(df))]
 
@@ -172,6 +185,7 @@ def process_dataframe(df:pd.DataFrame, matrix:csr_matrix, neiNum:Counter, save:b
         Returns:
             celltype2 (str): Neighboring cell type.
         """
+        
         # Extract neighboring cell type from the list
         temp = str(neiType).split("'")       
         for temp_neiType in temp:

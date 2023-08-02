@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="CellNeighborEX", 
-    version="0.0.3", 
+    version="0.0.4", 
     author="hkim240", 
     author_email="hbkim20005@gmail.com", 
     description="library for neighbor-dependent gene expression analysis", 
@@ -18,5 +18,5 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.7',
+    python_requires='>=3.7,<3.11',
 )

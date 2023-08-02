@@ -3,36 +3,39 @@ import pandas as pd
 from collections import Counter
 
 
-def generate_input_files(data_type, df, sample_size=30, min_sample_size=1, root ='categorized_data/'):
+def generate_input_files(data_type:str, df:pd.DataFrame, sample_size=30, min_sample_size=1, root ='categorized_data/'):
     """
     Generate input files for DEG analysis based on the given data.
 
-    Arguments:
+    Paremeters:
         data_type: Type of data ('Image' or 'NGS').
         df (pandas.DataFrame): The input DataFrame containing the data.
-        output_file_path (str): The folder path where the output files will be stored.
         sample_size (int, optional): The cutoff for the number of heterogeneous spots to consider. Default is 30.
         min_sample_size (int, optional): The minimum sample size required for processing. Default is 1.
+        root (str): Root directory for saving the plot.
+
+    Returns:
+        None        
     """
 
+    # Covert doublet types to unique numbers and adding the numbers to df  
     if data_type == "Image":
         
         df['integrated'] = 'NA'
         for idx in range(len(df['integrated'])):
             df['integrated'][idx] = df['celltype1'][idx] + '+' + df['celltype2'][idx]
     
-        # Coverting doublet types to unique numbers and adding the numbers to df  
         df['value'] = df.apply(lambda x: hash(frozenset([x["integrated"]])),axis=1)
         
     elif data_type == "NGS":  
     
-        # Coverting doublet types to unique numbers and adding the numbers to df
         df['value'] = df.apply(lambda x: hash(frozenset([x["celltype1"], x["celltype2"]])), axis=1)
+
     else:
         
-        print("Please choose a data type between Imga and NGS.")
+        print("Please choose one data type between Image and NGS.")
         
-    # Sorting the doublet types along the sample size
+    # Sort the doublet types along the sample size
     counter_doublets = Counter(df['value'])
     sorted_counter = sorted(counter_doublets.items(), key=lambda x: x[1], reverse=True)
 

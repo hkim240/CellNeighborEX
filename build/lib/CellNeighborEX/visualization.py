@@ -67,6 +67,7 @@ def set_parameters(df_processed:pd.DataFrame, df_exp:pd.DataFrame, beadsize_bg:f
         df_black (pd.DataFrame): Subset of df_processed containing cells of type black.
     """
     
+    # Set parameter values of df_processed
     df_processed['beadsize'] = beadsize_bg 
     df_processed['edgecolor'] = 'NA'
     df_processed['beadcolor'] = 'NA'
@@ -106,8 +107,7 @@ def set_parameters(df_processed:pd.DataFrame, df_exp:pd.DataFrame, beadsize_bg:f
 
     return df_processed, df_red, df_blue, df_black            
 
-
-def get_spatialPlot(df_bg:pd.DataFrame, df_red:pd.DataFrame, df_blue:pd.DataFrame, df_black:pd.DataFrame, label_red:str, label_blue:str, label_black:str, label_gene:str, figsize:tuple, save:bool, root ='spatialMap/'):
+def get_spatialPlot(df_bg:pd.DataFrame, df_red:pd.DataFrame, df_blue:pd.DataFrame, df_black:pd.DataFrame, label_red:str, label_blue:str, label_black:str, label_gene:str, figsize:tuple, save:bool, root='spatialMap/', zorder_red=2.0, zorder_blue=2.0, zorder_black=2.0):
     """
     Generate a spatial plot using the provided DataFrames and parameters.
 
@@ -120,6 +120,9 @@ def get_spatialPlot(df_bg:pd.DataFrame, df_red:pd.DataFrame, df_blue:pd.DataFram
         label_blue (str): Label for cells of type blue in the legend.
         label_black (str): Label for cells of type black in the legend.
         label_gene (str): Label for the gene expression in the colorbar title.
+        zorder_red (float, optional): drawing order for cells of type red.
+        zorder_blue (float, optional): drawing order for cells of type blue.
+        zorder_black (float, optional): drawing order for cells of type black.
         figsize (tuple): Size of the figure (width, height).
         save (bool): Flag indicating whether to save the plot.
         root (str): Root directory for saving the plot.
@@ -127,28 +130,29 @@ def get_spatialPlot(df_bg:pd.DataFrame, df_red:pd.DataFrame, df_blue:pd.DataFram
     Returns:
         None
     """
-
+    
+    # Figure size
     fig, ax = plt.subplots(figsize=figsize)  
 
     # Gray - background
     cbar_flag = ax.scatter(df_bg['x'], df_bg['y'], s=df_bg['beadsize'], c=df_bg['expression'].to_numpy(), cmap='bwr',
-                           edgecolor=df_bg['edgecolor'], linewidths=2, zorder=2.0)
+                           edgecolor=df_bg['edgecolor'], linewidths=2, zorder=1.0)
 
     # Red
     ax.scatter(df_red['x'], df_red['y'], s=df_red['beadsize'], c=df_red['expression'].to_numpy(),
-               cmap='bwr', edgecolor=df_red['edgecolor'], linewidths=2, zorder=4.0)
+               cmap='bwr', edgecolor=df_red['edgecolor'], linewidths=2, zorder=zorder_red)
     ax.scatter(df_red['x'], df_red['y'], s=df_red['beadsize'], c='white',
                edgecolor=df_red['edgecolor'], linewidths=2, label=label_red)
 
     # Blue
     ax.scatter(df_blue['x'], df_blue['y'], s=df_blue['beadsize'], c=df_blue['expression'].to_numpy(),
-               cmap='bwr', edgecolor=df_blue['edgecolor'], linewidths=2, zorder=3.0)
+               cmap='bwr', edgecolor=df_blue['edgecolor'], linewidths=2, zorder=zorder_blue)
     ax.scatter(df_blue['x'], df_blue['y'], s=df_blue['beadsize'], c='white',
                edgecolor=df_blue['edgecolor'], linewidths=2, label=label_blue)
 
     # Black
     ax.scatter(df_black['x'], df_black['y'], s=df_black['beadsize'], c=df_black['expression'].to_numpy(),
-               cmap='bwr', edgecolor=df_black['edgecolor'], linewidths=2, zorder=5.0)
+               cmap='bwr', edgecolor=df_black['edgecolor'], linewidths=2, zorder=zorder_black)
     ax.scatter(df_black['x'], df_black['y'], s=df_black['beadsize'], c='white',
                edgecolor=df_black['edgecolor'], linewidths=2, label=label_black)
 
@@ -174,6 +178,4 @@ def get_spatialPlot(df_bg:pd.DataFrame, df_red:pd.DataFrame, df_blue:pd.DataFram
     if save == True:
         if not os.path.exists(root):
             os.makedirs(root)  
-        plt.savefig('spatialMap/%s.pdf' %label_gene, bbox_inches='tight')    
-        
-    #plt.show()
+        plt.savefig('spatialMap/%s.pdf' %label_gene, bbox_inches='tight')

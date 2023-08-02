@@ -11,18 +11,17 @@ from tqdm import tqdm
 
 
 def two_sample_f_test(data1, data2):
-    
     """
     Calculates the F-statistic and p-value for a two-sample F-test.
 
     Parameters:
-        data1 (array-like): The first sample data.
-        data2 (array-like): The second sample data.
+        data1: The first sample data.
+        data2: The second sample data.
 
     Returns:
         tuple: A tuple containing the F-statistic and p-value.
-            - f_stat (float): The F-statistic value.
-            - p_value (float): The p-value associated with the F-statistic.
+            - f_stat: The F-statistic value.
+            - p_value: The p-value associated with the F-statistic.
     """
     
     # Calculate the variances
@@ -47,21 +46,20 @@ def two_sample_f_test(data1, data2):
 
 
 def create_nullmodel(seedNumber, randSize, prop, matchComb, clusterSelect, log_data):
-    
     """
     Generates artificial heterotypic spots and computes normalized properties.
 
     Parameters:
-        seedNumber (int): Seed number for randomization.
-        randSize (int): Size of randomization.
-        prop (numpy.ndarray): Proportions of cell types in heterotypic beads.
-        matchComb (numpy.ndarray): Array indicating the matching combinations.
-        clusterSelect (numpy.ndarray): Array specifying cluster numbers.
-        log_data (numpy.ndarray): Log data of cells.
+        seedNumber: Seed number for randomization.
+        randSize: Size of randomization.
+        prop: Proportions of cell types in heterotypic beads.
+        matchComb: Array indicating the matching combinations.
+        clusterSelect: Array specifying cluster numbers.
+        log_data: Log data of cells or spots.
 
     Returns:
-        log_data_artificialHeteroSpots (numpy.ndarray): Artificial heterotypic spots.
-        normalized_props (numpy.ndarray): Normalized properties of heterotypic beads.
+        log_data_artificialHeteroSpots: Artificial heterotypic spots.
+        normalized_props: Normalized properties of heterotypic spots.
     """
     
     # Set the seed for the random number generator to ensure reproducibility
@@ -146,28 +144,30 @@ def create_nullmodel(seedNumber, randSize, prop, matchComb, clusterSelect, log_d
 
 
 def find_nullDEGs(center_celltype, clusterSelect, matchComb, neiCombUnique, log_data, log_data_artificialHeteroSpots, gene_name, pCutoff, pCutoff2, lrCutoff, direction, normality_test):
-    
     """
     Find Null Differentially Expressed Genes (DEGs) based on the provided parameters.
 
     Parameters:
-    - center_celltype: The center cell type.
-    - clusterSelect: The selected cluster.
-    - matchComb: The combination used for matching.
-    - neiCombUnique: Unique neighboring combination.
-    - log_data: The log-transformed data.
-    - log_data_artificialHeteroSpots: Artificial heterogeneity spots in log-transformed data.
-    - gene_name: Gene names.
-    - pCutoff: P-value cutoff.
-    - pCutoff2: Secondary P-value cutoff.
-    - lrCutoff: Log ratio cutoff.
-    - direction: Direction flag for DEG filtering.
+        - center_celltype: The center cell type.
+        - clusterSelect: The selected cluster.
+        - matchComb: The combination used for matching.
+        - neiCombUnique: Unique neighboring combination.
+        - log_data: The log-transformed data.
+        - log_data_artificialHeteroSpots: Artificial heterogeneity spots in log-transformed data.
+        - gene_name: List of genes.
+        - pCutoff: P-value cutoff.
+        - pCutoff2: Secondary P-value cutoff. False discover rate.
+        - lrCutoff: Log ratio cutoff.
+        - direction: Direction flag (up-regulated or down-regulated genes) for DEG filtering.
+        - normality_test: Flag to indicate whether to perform the normality test (Shapiro-Wilk test). 
 
     Returns:
-    - null_DEGs: A list of gene names identified as Null DEGs.
-    - logRatio_null: The log ratio values of Null DEGs.
-    - pvalue_null: The p-values of Null DEGs.
-    - fdr_null: The False Discovery Rate (FDR) values of Null DEGs.
+        - null_DEGs: A list of gene names identified as Null DEGs.
+        - logRatio_null: The log ratio values of Null DEGs.
+        - pvalue_null: The p-values of Null DEGs.
+        - fdr_null: The False Discovery Rate (FDR) values of Null DEGs.
+        - logRatio_null_total: Total log ratio values.
+        - fdr_null_total: Total FDR values.
     """
 
     cellSelect1 = matchComb == clusterSelect[0]  # Selects cells based on matching combinations.
@@ -184,7 +184,7 @@ def find_nullDEGs(center_celltype, clusterSelect, matchComb, neiCombUnique, log_
     sample_size = 30
     alpha = 0.05
     for i in range(log_data.shape[0]):
-        
+        p = 1
         if (log_data_artificialHeteroSpots.shape[1] > 2) and (np.sum(cellSelect1) > 2):
             
             if normality_test == True:
@@ -273,34 +273,49 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
     Find differentially expressed genes (DEGs) related to cell-cell contacts.
     
     Parameters:
-    - data_type: Type of data. It has to be 'Image' or 'NGS'.
-    - center_celltype: The center cell type used for comparison.
-    - clusterSelect: List of cluster indices to select for comparison.
-    - matchComb: Combination of cluster indices.
-    - neiCombUnique: Unique combination of neighboring cluster indices.
-    - log_data: Log-transformed data for gene expression.
-    - gene_name: Names of genes.
-    - pCutoff: Cutoff value for p-value.
-    - lrCutoff: Cutoff value for log-ratio.
-    - null_DEGs: DEGs identified from the null model.
-    - fdr_null: False discovery rate (FDR) for null DEGs.
-    - logRatio_null: Log-ratio values for null DEGs.
-    - direction: Direction of differential expression. Can be 1 for up-regulated or -1 for down-regulated.
+        - data_type: Type of data. It has to be 'Image' or 'NGS'.
+        - center_celltype: The center cell type used for comparison.
+        - clusterSelect: List of cluster indices to select for comparison.
+        - matchComb: Combination of cluster indices.
+        - neiCombUnique: Unique combination of neighboring cluster indices.
+        - log_data: Log-transformed data for gene expression.
+        - gene_name: Names of genes.
+        - pCutoff: Cutoff value for p-value.
+        - pCutoff2: Secondary P-value cutoff. False discovery rate.
+        - lrCutoff: Cutoff value for log-ratio.
+        - null_DEGs: DEGs identified from the null model.
+        - fdr_null: False discovery rate (FDR) for null DEGs.
+        - logRatio_null: Log-ratio values for null DEGs.
+        - direction: Direction flag (up-regulated or down-regulated genes) for DEG filtering.
+        - normality_test: Flag to indicate whether to perform the normality test (Shapiro-Wilk test). 
     
-    Return:
-    - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
-    - cellContact_DEGs: Names of cell-contact DEGs.
-    - logRatio1_cellContact: Log-ratio values for cell-contact DEGs (comparison 1).
-    - pvalue1_cellContact: p-values for cell-contact DEGs (comparison 1).
-    - fdr1_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 1).
-    - logRatio2_cellContact: Log-ratio values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
-    - pvalue2_cellContact: p-values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
-    - fdr2_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
-    - logRatio_null_cellContact: Log-ratio values for null DEGs (cell-contact) (only for data_type = 'NGS').
-    - fdr_null_cellContact: False discovery rate (FDR) for null DEGs (cell-contact) (only for data_type = 'NGS').
-    - logRatio1_total: Log-ratio values for all genes.
-    - pvalue1_total: p-values for all genes.
-    - fdr1_total: False discovery rate (FDR) for all genes 
+    Returns:
+        Depending on the 'data_type' parameter, it returns different tuples.
+        For data_type == 'Image':
+        - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
+        - cellContact_DEGs: Names of cell-contact DEGs.
+        - logRatio1_cellContact: Log-ratio values for cell-contact DEGs (comparison 1).
+        - pvalue1_cellContact: p-values for cell-contact DEGs (comparison 1).
+        - fdr1_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 1).
+        - logRatio1_total: Log-ratio values for all genes.
+        - pvalue1_total: p-values for all genes.
+        - fdr1_total: False discovery rate (FDR) for all genes.
+
+        For data_type == 'NGS':
+        - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
+        - cellContact_DEGs: Names of cell-contact DEGs.
+        - logRatio1_cellContact: Log-ratio values for cell-contact DEGs (comparison 1).
+        - pvalue1_cellContact: p-values for cell-contact DEGs (comparison 1).
+        - fdr1_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 1).
+        - logRatio2_cellContact: Log-ratio values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
+        - pvalue2_cellContact: p-values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
+        - fdr2_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
+        - logRatio_null_cellContact: Log-ratio values for null DEGs (cell-contact) (only for data_type = 'NGS').
+        - fdr_null_cellContact: False discovery rate (FDR) for null DEGs (cell-contact) (only for data_type = 'NGS').
+        - logRatio1_total: Log-ratio values for all genes.
+        - pvalue1_total: p-values for all genes.
+        - fdr1_total: False discovery rate (FDR) for all genes.
+
     """
     
     cellSelect1 = matchComb == clusterSelect[0]  # Selects cells that match clusterSelect[0]
@@ -482,7 +497,11 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
         # Final cell-contact DEGs
         cellContact_DEGs = list(np.intersect1d(null_DEGs, temp_DEGs)) # Get names of DEGs.
         cellContact_DEGs_IDX = np.where(np.isin(gene_name, cellContact_DEGs))[0]  # Get indices of DEGs. 
-    
+        cellContact_DEGs = [] # Initialize DEG list.
+        for i in range(len(cellContact_DEGs_IDX)):
+            index = cellContact_DEGs_IDX[i]
+            cellContact_DEGs.append(gene_name[0][index]) # Get the names of DEGs
+
         null_cellContact_DEGs_IDX = np.array([]) # Initialize DEG index array
         for gene in cellContact_DEGs:
             tmp_val = np.where(np.array(null_DEGs) == gene)[0]
@@ -511,31 +530,30 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
                 
     else:
         
-        print("Please choose a data type between Imga and NGS.")
+        print("Please choose one data type between Image and NGS.")
      
     
 def get_heatmap(data_type, center_celltype, clusterSelect, matchComb, neiCombUnique, log_data, log_data_zvalue, gene_name, cell_id, cellContact_DEGs_IDX, logRatio1_cellContact, logRatio2_cellContact, folderName2):
-    
     """
     Plot heatmaps for the given data.
 
     Parameters:
-    - data_type (str): Type of data ('Image' or 'NGS').
-    - center_celltype (str): Center cell type.
-    - clusterSelect (list): List of cluster select values.
-    - matchComb (numpy.ndarray): Array of match combinations.
-    - neiCombUnique (list): List of unique neighbor combinations.
-    - log_data (pandas.DataFrame): Log data.
-    - log_data_zvalue (pandas.DataFrame): Z-value of log data.
-    - gene_name (list): List of gene names.
-    - cell_id (list): List of cell IDs.
-    - cellContact_DEGs_IDX (numpy.ndarray): Indices of cell-contact DEGs.
-    - logRatio1_cellContact (numpy.ndarray): Log ratio 1 of cell-contact.
-    - logRatio2_cellContact (numpy.ndarray): Log ratio 2 of cell-contact.
-    - folderName2 (str): Folder name to save the files.
+        - data_type: Type of data ('Image' or 'NGS').
+        - center_celltype: Center cell type.
+        - clusterSelect: List of cluster select values.
+        - matchComb: Array of match combinations.
+        - neiCombUnique: List of unique neighbor combinations.
+        - log_data: Log data.
+        - log_data_zvalue: Z-value of log data.
+        - gene_name: List of gene names.
+        - cell_id: List of cell IDs.
+        - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
+        - logRatio1_cellContact: Log ratio 1 of cell-contact.
+        - logRatio2_cellContact: Log ratio 2 of cell-contact.
+        - folderName2: Folder name to save the files.
 
     Returns:
-    None
+        None
     """
     
     cellSelect1 = matchComb == clusterSelect[0]  # Selects cells based on the match combination with the first cluster
@@ -732,9 +750,6 @@ def get_heatmap(data_type, center_celltype, clusterSelect, matchComb, neiCombUni
         # Adjust the plot layout to avoid overlapping elements
         plt.tight_layout()
         
-        # Display the plot
-        #plt.show()
-        
         # Assign a filename for the heatmap plot
         filename_heatmap = center_celltype
         
@@ -747,13 +762,25 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
     Generate a volcano plot based on the input DataFrame.
 
     Parameters:
-        df (pandas.DataFrame): The input DataFrame containing the data.
-        data_type (str): Choose between Image and NGS.
+        df: The input DataFrame containing the data.
+        data_type: Choose between Image and NGS.
+        cneter_celltype: Center cell type.
+        pCutoff: Cutoff value for p-value.
+        lrCutoff: Cutoff value for log-ratio.
+        top_genes: The number of top genes annotated in the volcano plot.
+        folderName2: Folder name to save the files.
+
+    Returns:
+        None        
     """
+
     if data_type == "Image":
         x_name = 'logRatio1'
         y_name = 'fdr1'
-        
+        for i in range(len(df)):
+            if df['fdr1'][i] == 0:
+                df['fdr1'][i] = 0.0000000001
+
     elif data_type == "NGS":
         final_logRatio = []
         final_pValue = []
@@ -793,7 +820,7 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
             else:
                 all_positive = all(num > 0 for num in orgLogRatio)
                 all_negative = all(num < 0 for num in orgLogRatio)
-                if (min_logRatio > 0.4) and (max_pVal < 0.01) and ((all_positive == True) or (all_negative == True)):
+                if (min_logRatio > lrCutoff) and (max_pVal < pCutoff) and ((all_positive == True) or (all_negative == True)):
                     final_logRatio.append(df['logRatio_null'][i])
                     final_pValue.append(df['fdr_null'][i])
                 else:    
@@ -801,13 +828,16 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
                     final_pValue.append(0)
         
         df['smallest_logRatio'] = final_logRatio
-        df['largest_pvalue'] = final_pValue      
-            
+        df['largest_pvalue'] = final_pValue
+        for i in range(len(df)):
+            if df['largest_pvalue'][i] == 0:
+                df['largest_pvalue'][i] = 0.0000000001
+
         x_name = 'smallest_logRatio'
         y_name = 'largest_pvalue'
         
     else:
-        raise ValueError("Please choose a data type between Imga and NGS.")
+        raise ValueError("Please choose one data type between Image and NGS.")
     
     plt.close('all')
     fig = plt.figure(figsize=(6, 4)) 
@@ -820,21 +850,23 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
     plt.scatter(x=down[x_name],y=down[y_name].apply(lambda x:-np.log10(x)),s=4,label="Down-regulated",color="blue")
     plt.scatter(x=up[x_name],y=up[y_name].apply(lambda x:-np.log10(x)),s=4,label="Up-regulated",color="red")
 
-    # Label top 10 up-regulated genes
+    # Label top up-regulated genes
     texts_up=[]
     up_top = up.nlargest(top_genes, x_name)
     for i, r in up_top.iterrows():
         texts_up.append(plt.text(x=r[x_name], y=-np.log10(r[y_name]), s=up_top['gene'][i]))
-    adjust_text(texts_up,arrowprops=dict(arrowstyle="-", color='black', lw=0.5))
+    
+    if texts_up != []:   
+        adjust_text(texts_up, arrowprops=dict(arrowstyle="-", color='black', lw=0.5))
 
-    # Label top 10 down-regulated genes
+    # Label top down-regulated genes
     texts_down=[]
     down_top = down.nsmallest(top_genes, x_name)
     for i, r in down_top.iterrows():
         texts_down.append(plt.text(x=r[x_name], y=-np.log10(r[y_name]), s=down_top['gene'][i]))
 
     if texts_down != []:    
-        adjust_text(texts_down,arrowprops=dict(arrowstyle="-", color='black', lw=0.5))
+        adjust_text(texts_down, arrowprops=dict(arrowstyle="-", color='black', lw=0.5))
 
     filename_volcano = center_celltype
 
@@ -844,14 +876,22 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
     plt.axvline(-lrCutoff,color="grey",linestyle="--")
     plt.axvline(lrCutoff,color="grey",linestyle="--")
     plt.axhline(-np.log10(pCutoff),color="grey",linestyle="--")
-    #plt.legend(bbox_to_anchor=(1.0, 1.0))
-    #plt.show()
     
     fig.savefig(f"{folderName2}/{filename_volcano}_volcano.pdf", dpi=300)
 
 
 def delete_files_with_keyword(directory, keyword):
-    
+    """
+    Deletes files in the specified directory that contain the given keyword in their filenames.
+
+    Parameters:
+        directory: The path of the directory containing the files.
+        keyword: The keyword to search for in the filenames.
+
+    Returns:
+        None
+    """
+
     file_list = os.listdir(directory)
     
     for filename in file_list:
@@ -865,16 +905,39 @@ def delete_files_with_keyword(directory, keyword):
                 print(f"Error while deleting {file_path}: {e}")
 
 
-def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, data_type, lrCutoff, pCutoff, pCutoff2, direction, normality_test, top_genes, save:bool, root ='DE_results/'):
+def analyze_data(df_cell_id:pd.DataFrame, df_gene_name:pd.DataFrame, df_log_data:pd.DataFrame, path_categorization:str, data_type:str, lrCutoff:float, pCutoff:float, pCutoff2:float, direction:str, normality_test:bool, top_genes:int, save:bool, root ='DE_results/'):
+    """
+    Function to perform neighbor-dependent gene expression analysis.
     
-    # Conducting neighbor-dependent gene expression analysis
+    Parameters:
+        df_cell_id (pd.DataFrame): DataFrame containing cell IDs.
+        df_gene_name (pd.DataFrame): DataFrame containing gene names.
+        df_log_data (pd.DataFrame): DataFrame containing log-transformed data.
+        path_categorization (str): Path to categorization files.
+        data_type (str): Type of data (either "Image" or "NGS").
+        lrCutoff (float): Log ratio cutoff value.
+        pCutoff (float): p-value cutoff value.
+        pCutoff2 (float): Secondary p-value cutoff value.
+        direction (str): Direction of analysis (e.g., "upregulated", "downregulated").
+        normality_test (str): Type of normality test to use.
+        top_genes (int): Number of top genes to consider.
+        save (bool): Flag indicating whether to save the results.
+        root (str, optional): Root folder to save results. Default is 'DE_results/'.
+        
+    Returns:
+        total_df (pd.DataFrame): DataFrame containing aggregated results.
+    """
+
+    # Initialize lists to store the results
     cellType_total_contact_DEGs = []
     total_contact_DEGs = []
     logRatio1_total_contact_DEGs = []
     pvalue1_total_contact_DEGS = []
     
+    # Check the data type (Image or NGS)
     if data_type == "Image":
         
+        # Process Image data
         files = os.listdir(path_categorization)  
         for file in files:
             if file == '.DS_Store':
@@ -890,7 +953,7 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
         
     elif data_type == "NGS":
         
-        # Import data
+        # Process Image data
         files = os.listdir(path_categorization)
         for file in files:
             if file == '.DS_Store':
@@ -908,10 +971,10 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
         org_log_data = org_log_data.rename(columns=dict(zip(org_log_data.columns, new_columns)))     
                 
     else:
-        print("Please choose a data type between Imga and NGS.")   
+        print("Please choose one data type between Image and NGS.")   
     
-             
-    center_celltype_set = set()  # Set to store unique third elements
+    # Set to store unique third elements         
+    center_celltype_set = set()  
     for file_name in files:
         
         # Remove the '.csv' extension
@@ -924,9 +987,10 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
         if len(elements) >= 3:
             center_celltype_set.add(elements[2])
     
-            
+    # Iterate through different center cell types and perform analysis        
     for k in tqdm(range(len(center_celltype_set)), desc = "neighbor-dependent gene expression analysis"):
         
+        # Process each center cell type
         print(k)
         center_celltype = list(center_celltype_set)[k]
         cell_id = org_cell_id.copy()
@@ -957,6 +1021,7 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
         log_data_zvalue = log_data_zvalue.iloc[:, selected_row.index]
         log_data_zvalue.columns = column_names
         
+        # Perform analysis based on data type (Image or NGS)
         if data_type == "Image":
             clusterSelect = list(np.unique(matchComb))
             
@@ -966,16 +1031,17 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
             clusterSelect = list(np.unique(matchComb))
     
             heteroSpotNum = np.sum(matchComb == clusterSelect[0])
-            if heteroSpotNum > 100:
-                randSize = 30
+            if heteroSpotNum > 100: # To reduce simulation time, if the number of true heterotypic spots is larger than 100, 
+                randSize = 30       # 30 artificial heterotypic spots are generated for each spot.
             else:
-                randSize = 100
+                randSize = 100 # 100 artificial heterotypic spots are generated for each spot.
     
             log_data_artificialHeteroSpots, normalized_props = create_nullmodel(seedNumber, randSize, prop, matchComb, clusterSelect, log_data)
     
         else:
-            print("Please choose a data type between Imga and NGS.")
-            
+            print("Please choose one data type between Image and NGS.")
+
+        # Save results and generate plots if required    
         folderName2 = os.path.join(root, center_celltype)
         df = pd.DataFrame()
         df2 = pd.DataFrame()
@@ -1015,13 +1081,9 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
                 os.makedirs(folderName2, exist_ok=True)
                 save_path = os.path.join(folderName2, center_celltype +'_stat_null_cotact_genes.csv')
                 df_null = pd.DataFrame({'null_DEGs': null_DEGs, 'pvalue_null': pvalue_null, 'fdr_null': fdr_null, 'logRatio_null': logRatio_null})
-                #df_null.to_csv(save_path, index=False)
+                
                 save_path2 = os.path.join(folderName2, center_celltype +'_stat_null_total_genes.csv')
                 df_null2 = pd.DataFrame({'gene': list(gene_name[0]),'logRatio_null': logRatio_null_total, 'fdr_null': fdr_null_total})
-                #df_null2.to_csv(save_path2, index=False)
-    
-                #load_path = os.path.join(folderName2, center_celltype +'_stat_null_cotact_genes.csv')
-                #loaded_data = pd.read_csv(load_path)
                 
                 cellContact_DEGs_IDX, cellContact_DEGs, logRatio1_cellContact, pvalue1_cellContact, fdr1_cellContact, logRatio2_cellContact, pvalue2_cellContact, fdr2_cellContact, logRatio_null_cellContact, fdr_null_cellContact, logRatio1_total, pvalue1_total, fdr1_total, logRatio2_total, pvalue2_total, fdr2_total = find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCombUnique, log_data, gene_name, pCutoff, pCutoff2, lrCutoff, null_DEGs, df_null['fdr_null'], df_null['logRatio_null'], direction, normality_test)
                 
@@ -1046,7 +1108,7 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
             else:
                 cellContact_DEGs = []
         else:
-            print("Please choose a data type between Imga and NGS.")
+            print("Please choose one data type between Image and NGS.")
             
         if len(cellContact_DEGs) > 0:
             if data_type == "Image":
@@ -1058,16 +1120,23 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
                 get_volcano_plot(df2, data_type, center_celltype, pCutoff2, lrCutoff, top_genes, folderName2)
                 get_heatmap(data_type, center_celltype, clusterSelect, matchComb, neiCombUnique, log_data, log_data_zvalue, gene_name, cell_id, cellContact_DEGs_IDX, logRatio1_total_contact_DEGs, logRatio2_total_contact_DEGs, folderName2)
     
+    # Aggregate results for all center cell types
+    total_df = pd.DataFrame()
     if data_type == "Image" and len(total_contact_DEGs) > 0:
         total_df = pd.DataFrame({'celltype': cellType_total_contact_DEGs, 'DEG': total_contact_DEGs, 'logRatio1': logRatio1_total_contact_DEGs, 'pvalue1': pvalue1_total_contact_DEGS, 'fdr1': fdr1_total_contact_DEGs})
         
     elif data_type == "NGS" and len(total_contact_DEGs) > 0:
         total_df = pd.DataFrame({'celltype': cellType_total_contact_DEGs, 'DEG': total_contact_DEGs, 'logRatio1': logRatio1_total_contact_DEGs, 'pvalue1': pvalue1_total_contact_DEGS, 'logRatio2': logRatio2_total_contact_DEGs, 'pvalue2': pvalue2_total_contact_DEGs, 'logRatio_null': logRatio_null_total_contact_DEGs, 'fdr_null': fdr_null_total_contact_DEGs})
     
-    # Check if saving is requested
+    else:
+        print("The number of cell contact-dependent genes is zero.")
+
+    # Save the results if requested
     if save == True:
         if not os.path.exists(root):
-            os.makedirs(root)  
-        total_df.to_csv(root + 'DEG_list.csv', index = None)
+            os.makedirs(root) 
+        if len(total_df) > 0:     
+            total_df.to_csv(root + 'DEG_list.csv', index = None)
     
+    # Return the aggregated results
     return total_df
