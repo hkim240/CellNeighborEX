@@ -5,15 +5,19 @@ The figure below shows the workflow of CellNeighborEX:
 
 ![Fig 1](https://user-images.githubusercontent.com/99720939/229945240-2c9a2ef9-2566-496f-9981-0823cd95b813.png)
 
-# Version update: 0.0.4 (Aug.2.2023)
+# Version update: v0.0.4
 - bug fix: get_volcano_plot() in DEanalysis.py
 - additional parameters: get_spatialPlot() in visualization.py
 
 # Install
 <code>conda create -n myenv python=3.10</code> 
+
 <code>conda activate myenv</code> 
+
 <code>conda install pip</code> 
+
 <code>pip install -r requirements.txt</code> 
+
 <code>pip install CellNeighborEX</code> 
 
 # Citation
