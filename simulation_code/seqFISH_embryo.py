@@ -8,7 +8,8 @@ import pandas as pd
 
 # To run CellNeighborEX, information on cell type annotation, spatial location, and expression values is required.
 # For preparation of input data, please refer to simulation_data on the github page.
-
+# The CellNeighborEX python scripts provide the description of parameters and returns for each function: 
+# https://github.com/hkim240/CellContact/tree/main/CellNeighborEX
 
 #### (1) Import spatial transcriptomics (ST) data
 # Image-based data: seqFISH
@@ -16,6 +17,8 @@ adata = sq.datasets.seqfish()  # 19416 cells x 351 genes
 
 
 #### (2) Define immediate neighbors for cell contact & Categorize cells into heterotypic neighbors and homotypic neighbors
+# coord_key (str): Key to access the spatial coordinates in `adata.obsm`.
+# celltype_key (str): Key to access the cell type information in `adata.obs`.
 df =  CellNeighborEX.neighbors.create_dataframe(adata, coord_key='spatial', celltype_key='celltype_mapped_refined')
 
 # The closest_distances function is optional. If it is needed to caculate closest distances, this function can be used.
@@ -34,8 +37,21 @@ CellNeighborEX.categorization.generate_input_files(data_type = "Image", df = df_
 #### (3) Perform neighbor-dependent gene expression analysis
 # set paths of input data: categorized data files and expression data.
 # you can download 'cell_id.txt', 'gene_name.txt', and 'log_data.txt' in simulation_data/expression_data/seqFISH_embryo on the github page.
+# cell_id.txt: cell or spot barcodes
+# gene_name.txt: genes of interest
+# log_data.txt: log-normalized data
+
+# How to produce 'cell_id.txt', 'gene_name.txt', and 'log_data.txt'
+# barcodes = df_processed['barcode'].tolist()
+# adata = adata[barcodes, :]
+# pd.DataFrame(adata.var.index).to_csv("/Users/kimh15/expression_data/seqFISH_embryo/gene_name.txt", index=False, header=None)
+# pd.DataFrame(adata.obs.index).to_csv("/Users/kimh15/expression_data/seqFISH_embryo/cell_id.txt", index=False, header=None)
+# sc.pp.normalize_total(adata, target_sum=1e4) # normlization
+# sc.pp.log1p(adata) # log-transform
+# adata.T.to_df().to_csv('/Users/kimh15/expression_data/seqFISH_embryo/log_data.txt', index=False)
+
 path_lognormalized_data = '/Users/kimh15/expression_data/seqFISH_embryo/'
-df_cell_id = pd.read_csv(path_lognormalized_data + "cell_id.txt", delimiter="\t", header=None)
+df_cell_id = pd.read_csv(path_lognormalized_data + "cell_id.txt", delimiter="\t", header=None) # The length of df_processed must be the same as the length of df_cell_id!
 df_gene_name = pd.read_csv(path_lognormalized_data + "gene_name.txt", delimiter="\t", header=None)
 df_log_data = pd.read_csv(path_lognormalized_data + "log_data.txt", delimiter=",", header=0)
 
@@ -77,6 +93,6 @@ df_exp = pd.concat([heterotypic, homotypic1, homotypic2])
 df_bg, df_red, df_blue, df_black = CellNeighborEX.visualization.set_parameters(df_processed, df_exp, beadsize_bg=5, edgecolor_bg=(0.85,0.85,0.85), beadcolor_bg=(0.85,0.85,0.85), beadsize_red=60, beadsize_blue=30, beadsize_black=30, type_red='Gut-tube+Neural-crest', type_blue='Gut-tube+Gut-tube', type_black='Neural-crest') 
 
 # get spatial map.
-# zorder_red, zorder_blue, and zorder_black are parameters that determin the drawing order in the spatial map.
+# zorder_red, zorder_blue, and zorder_black are parameters that determine the drawing order in the spatial map.
 # CellNeighborEX.visualization.get_spatialPlot (save=True): The spatial map is saved in the spatialMap folder of the root directory.
 CellNeighborEX.visualization.get_spatialPlot(df_bg, df_red, df_blue, df_black, label_red='Gut-tube+Neural-crest', label_blue='Gut-tube+Gut-tube', label_black='Neural-crest', label_gene='Pitx1', zorder_red=3.0, zorder_blue=2.0, zorder_black=4.0, figsize=(20,28), save=True)

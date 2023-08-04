@@ -6,7 +6,8 @@ import pandas as pd
 
 # To run CellNeighborEX, information on cell type annotation, spatial location, and expression values is required.
 # For preparation of input data, please refer to simulation_data on the github page.
-
+# The CellNeighborEX python scripts provide the description of parameters and returns for each function: 
+# https://github.com/hkim240/CellContact/tree/main/CellNeighborEX
 
 #### (1) Import spatial transcriptomics (ST) data
 # Slide-seq data: mouse liver_cancer
@@ -24,8 +25,11 @@ CellNeighborEX.categorization.generate_input_files(data_type = "NGS", df = df_pr
 #### (3) Perform neighbor-dependent gene expression analysis
 # set paths of input data: categorized data files and expression data.
 # you can download 'cell_id.txt', 'gene_name.txt', and 'log_data.txt' in simulation_data/expression_data/Slide-seq_liver_cancer on the github page.
+# cell_id.txt: cell or spot barcodes
+# gene_name.txt: genes of interest
+# log_data.txt: log-normalized data
 path_lognormalized_data = '/Users/kimh15/expression_data/Slide-seq_liver_cancer/'
-df_cell_id = pd.read_csv(path_lognormalized_data + "cell_id.txt", delimiter="\t", header=None)
+df_cell_id = pd.read_csv(path_lognormalized_data + "cell_id.txt", delimiter="\t", header=None) # The length of df_processed must be the same as the length of df_cell_id!
 df_gene_name = pd.read_csv(path_lognormalized_data + "gene_name.txt", delimiter="\t", header=None)
 df_log_data = pd.read_csv(path_lognormalized_data + "log_data.txt", delimiter="\t", header=None)
 
@@ -62,6 +66,6 @@ df_exp = pd.concat([heterotypic, homotypic1, homotypic2])
 df_bg, df_red, df_blue, df_black = CellNeighborEX.visualization.set_parameters(df_processed, df_exp, beadsize_bg=10, edgecolor_bg=(0.85,0.85,0.85), beadcolor_bg=(0.85,0.85,0.85), beadsize_red=600, beadsize_blue=200, beadsize_black=200, type_red='TumorIII+Monocyte', type_blue='TumorIII+TumorIII', type_black='Monocyte+Monocyte') 
 
 # get spatial map.
-# zorder_red, zorder_blue, and zorder_black are parameters that determin the drawing order in the spatial map.
+# zorder_red, zorder_blue, and zorder_black are parameters that determine the drawing order in the spatial map.
 # CellNeighborEX.visualization.get_spatialPlot (save=True): The spatial map is saved in the spatialMap folder of the root directory.
 CellNeighborEX.visualization.get_spatialPlot(df_bg, df_red, df_blue, df_black, label_red='TumorIII+Monocyte', label_blue='TumorIII', label_black='Monocyte', label_gene='F13a1', zorder_red=3.0, zorder_blue=2.0, zorder_black=4.0, figsize=(28,28), save=True)
