@@ -38,7 +38,7 @@ CellNeighborEX.categorization.generate_input_files(data_type = "Image", df = df_
 # set paths of input data: categorized data files and expression data.
 # you can download 'cell_id.txt', 'gene_name.txt', and 'log_data.txt' in simulation_data/expression_data/seqFISH_embryo on the github page.
 # cell_id.txt: cell or spot barcodes
-# gene_name.txt: genes of interest
+# gene_name.txt: genes of interest (In this example, all 351 genes were used.)
 # log_data.txt: log-normalized data
 
 # How to produce 'cell_id.txt', 'gene_name.txt', and 'log_data.txt'

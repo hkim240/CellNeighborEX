@@ -41,10 +41,10 @@ CellNeighborEX.categorization.generate_input_files(data_type = "NGS", df = df_pr
 # set paths of input data: categorized data files and expression data.
 # you can download 'cell_id.txt', 'gene_name.txt', and 'log_data.txt' in simulation_data/expression_data/Slide-seq_embryo on the github page.
 # cell_id.txt: cell or spot barcodes
-# gene_name.txt: genes of interest
+# gene_name.txt: genes of interest (In this example, top 2000 plus cell type markers were selected.)
 # log_data.txt: log-normalized data
 path_lognormalized_data = '/Users/kimh15/expression_data/Slide-seq_embryo/'
-df_cell_id = pd.read_csv(path_lognormalized_data + "cell_id.txt", delimiter="\t", header=None)
+df_cell_id = pd.read_csv(path_lognormalized_data + "cell_id.txt", delimiter="\t", header=None) # The length of df_processed must be the same as the length of df_cell_id!
 df_gene_name = pd.read_csv(path_lognormalized_data + "gene_name.txt", delimiter="\t", header=None)
 df_log_data = pd.read_csv(path_lognormalized_data + "log_data.txt", delimiter=" ", header=None)
 
@@ -60,6 +60,7 @@ normality_test = False # True: depending on the result of the normality test, th
                        # False: when sample size (number of cells/spots) is larger than 30, the parameteric test is used. Otherwise, the non-parametric test is used.
 top_genes = 10 # Top 10 DEGs are annotated in the volcano plot.
 
+# CellNeighborEX.DEanalysis.analyze_data (save=True): all result files are saved in the DE_results folder of the root directory.
 DEG_list = CellNeighborEX.DEanalysis.analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, data_type, lrCutoff, pCutoff, pCutoff2, direction, normality_test, top_genes, save=True)
 
 
