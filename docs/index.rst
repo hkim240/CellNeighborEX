@@ -1,4 +1,5 @@
 .. index documentation 
+|PyPI|
 
 CellNeighborEX 
 ==========================================================
@@ -21,3 +22,7 @@ The figure below shows the workflow of CellNeighborEX:
    installation
    api
    tutorials
+
+.. |PyPI| image:: https://img.shields.io/pypi/v/CellNeighborEX.svg
+    :target: https://pypi.org/project/CellNeighborEX/
+    :alt: PyPI   
