@@ -1,5 +1,3 @@
-[![PyPI](https://img.shields.io/pypi/v/CellNeighborEX?logo=PyPI)](https://pypi.org/project/CellNeighborEX)
-
 CellNeighborEX: Deciphering Neighbor-Dependent Gene Expression from Spatial Transcriptomics Data
 ====================================================================================
 <p align="justify">CellNeighborEX is a computational approach to identify genes up-regulated or down-regulated by immediate neighbors from spatial transcriptomics (ST) data at single cell or near cellular resolution. It works for both image-based and NGS-based ST data. For image-based ST data where exact cell locations are available, CellNeighborEX uses various algorithms including Delaunay triangulation and KNN to find immediate neighbors. For NGS-based ST data where exact cell locations are not available, CellNeighborEX leverages the mixture of transcriptomes in each spot. CellNeighborEX dissects cells or spots based on the cell types of the immediate neighbors. Carrying out differential expression analysis for the categorized cells or spots, CellNeighborEX detects neighbor-dependent genes. The expression of neighbor-dependent genes is validated in the spatial context.</p> 
@@ -20,7 +18,4 @@ pip install -r requirements.txt
 
 # Install CellNeighborEX from PyPI
 pip install CellNeighborEX
-</code></pre>     
-
-## Python API documentation and tutorials
-Please see this [Read the Docs pages](https://CellNeighborEX.readthedocs.io/en/latest/).
+</code></pre>
