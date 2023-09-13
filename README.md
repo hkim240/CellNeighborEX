@@ -11,14 +11,18 @@ The figure below shows the workflow of CellNeighborEX:
 ## Installation
 <p align="justify">CellNeighborEX requires Python version >=3.8, <3.11. We recommend using conda environment to avoid dependency conflicts. The dependencies are listed in requirements.txt.</p> 
 
-Create conda environment “myenv”:
-<code>conda create -n myenv python=3.10</code>
-<code>conda activate myenv</code> 
+<p>Create conda environment “myenv”:</p>
+<pre>
+    <code>
+        conda create -n myenv python=3.10
+        conda activate myenv
+    </code>
+</pre>     
 
-Navigate into the directory where requirements.txt is located. Then, install dependencies:
+<p>Navigate into the directory where requirements.txt is located. Then, install dependencies:</p>
 <code>pip install -r requirements.txt</code> 
 
-Install CellNeighborEX from PyPI:
+<p>Install CellNeighborEX from PyPI:</p>
 <code>pip install CellNeighborEX</code> 
 
 ## Python API documentation and tutorials
