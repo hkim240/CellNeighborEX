@@ -12,14 +12,17 @@ from tqdm import tqdm
 
 def two_sample_f_test(data1, data2):
     """
-    Calculates the F-statistic and p-value for a two-sample F-test.
+    Calculate the F-statistic and p-value for a two-sample F-test.
 
-    Parameters:
-        data1: The first sample data.
-        data2: The second sample data.
+    Parameters
+        data1
+            The first sample data.
+        data2
+            The second sample data.
 
-    Returns:
-        tuple: A tuple containing the F-statistic and p-value.
+    Returns
+        tuple
+            A tuple containing the F-statistic and p-value.
             - f_stat: The F-statistic value.
             - p_value: The p-value associated with the F-statistic.
     """
@@ -47,19 +50,27 @@ def two_sample_f_test(data1, data2):
 
 def create_nullmodel(seedNumber, randSize, prop, matchComb, clusterSelect, log_data):
     """
-    Generates artificial heterotypic spots and computes normalized properties.
+    Generate artificial heterotypic spots and computes normalized properties.
 
-    Parameters:
-        seedNumber: Seed number for randomization.
-        randSize: Size of randomization.
-        prop: Proportions of cell types in heterotypic beads.
-        matchComb: Array indicating the matching combinations.
-        clusterSelect: Array specifying cluster numbers.
-        log_data: Log data of cells or spots.
+    Parameters
+        seedNumber
+            Seed number for randomization.
+        randSize
+            Size of randomization.
+        prop
+            Proportions of cell types in heterotypic beads.
+        matchComb
+            Array indicating the matching combinations.
+        clusterSelect
+            Array specifying cluster numbers.
+        log_data
+            Log data of cells or spots.
 
-    Returns:
-        log_data_artificialHeteroSpots: Artificial heterotypic spots.
-        normalized_props: Normalized properties of heterotypic spots.
+    Returns
+        log_data_artificialHeteroSpots
+            Artificial heterotypic spots.
+        normalized_props
+            Normalized properties of heterotypic spots.
     """
     
     # Set the seed for the random number generator to ensure reproducibility
@@ -147,27 +158,45 @@ def find_nullDEGs(center_celltype, clusterSelect, matchComb, neiCombUnique, log_
     """
     Find Null Differentially Expressed Genes (DEGs) based on the provided parameters.
 
-    Parameters:
-        - center_celltype: The center cell type.
-        - clusterSelect: The selected cluster.
-        - matchComb: The combination used for matching.
-        - neiCombUnique: Unique neighboring combination.
-        - log_data: The log-transformed data.
-        - log_data_artificialHeteroSpots: Artificial heterogeneity spots in log-transformed data.
-        - gene_name: List of genes.
-        - pCutoff: P-value cutoff.
-        - pCutoff2: Secondary P-value cutoff. False discover rate.
-        - lrCutoff: Log ratio cutoff.
-        - direction: Direction flag (up-regulated or down-regulated genes) for DEG filtering.
-        - normality_test: Flag to indicate whether to perform the normality test (Shapiro-Wilk test). 
+    Parameters
+        center_celltype
+            The center cell type.
+        clusterSelect
+            The selected cluster.
+        matchComb
+            The combination used for matching.
+        neiCombUnique 
+            Unique neighboring combination.
+        log_data
+            The log-transformed data.
+        log_data_artificialHeteroSpots
+            Artificial heterogeneity spots in log-transformed data.
+        gene_name
+            List of genes.
+        pCutoff
+            P-value cutoff.
+        pCutoff2
+            Secondary P-value cutoff. False discover rate.
+        lrCutoff
+            Log ratio cutoff.
+        direction
+            Direction flag (up-regulated or down-regulated genes) for DEG filtering.
+        normality_test 
+            Flag to indicate whether to perform the normality test (Shapiro-Wilk test). 
 
-    Returns:
-        - null_DEGs: A list of gene names identified as Null DEGs.
-        - logRatio_null: The log ratio values of Null DEGs.
-        - pvalue_null: The p-values of Null DEGs.
-        - fdr_null: The False Discovery Rate (FDR) values of Null DEGs.
-        - logRatio_null_total: Total log ratio values.
-        - fdr_null_total: Total FDR values.
+    Returns
+        null_DEGs
+            A list of gene names identified as Null DEGs.
+        logRatio_null
+            The log ratio values of Null DEGs.
+        pvalue_null
+            The p-values of Null DEGs.
+        fdr_null
+            The False Discovery Rate (FDR) values of Null DEGs.
+        logRatio_null_total
+            Total log ratio values.
+        fdr_null_total
+            Total FDR values.
     """
 
     cellSelect1 = matchComb == clusterSelect[0]  # Selects cells based on matching combinations.
@@ -272,49 +301,88 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
     """
     Find differentially expressed genes (DEGs) related to cell-cell contacts.
     
-    Parameters:
-        - data_type: Type of data. It has to be 'Image' or 'NGS'.
-        - center_celltype: The center cell type used for comparison.
-        - clusterSelect: List of cluster indices to select for comparison.
-        - matchComb: Combination of cluster indices.
-        - neiCombUnique: Unique combination of neighboring cluster indices.
-        - log_data: Log-transformed data for gene expression.
-        - gene_name: Names of genes.
-        - pCutoff: Cutoff value for p-value.
-        - pCutoff2: Secondary P-value cutoff. False discovery rate.
-        - lrCutoff: Cutoff value for log-ratio.
-        - null_DEGs: DEGs identified from the null model.
-        - fdr_null: False discovery rate (FDR) for null DEGs.
-        - logRatio_null: Log-ratio values for null DEGs.
-        - direction: Direction flag (up-regulated or down-regulated genes) for DEG filtering.
-        - normality_test: Flag to indicate whether to perform the normality test (Shapiro-Wilk test). 
+    Parameters
+        data_type
+            Type of data. It has to be 'Image' or 'NGS'.
+        center_celltype
+            The center cell type used for comparison.
+        clusterSelect
+            List of cluster indices to select for comparison.
+        matchComb
+            Combination of cluster indices.
+        neiCombUnique
+            Unique combination of neighboring cluster indices.
+        log_data
+            Log-transformed data for gene expression.
+        gene_name
+            Names of genes.
+        pCutoff
+            Cutoff value for p-value.
+        pCutoff2
+            Secondary P-value cutoff. False discovery rate.
+        lrCutoff 
+            Cutoff value for log-ratio.
+        null_DEGs
+            DEGs identified from the null model.
+        fdr_null
+            False discovery rate (FDR) for null DEGs.
+        logRatio_null
+            Log-ratio values for null DEGs.
+        direction
+            Direction flag (up-regulated or down-regulated genes) for DEG filtering.
+        normality_test
+            Flag to indicate whether to perform the normality test (Shapiro-Wilk test). 
     
-    Returns:
+    Returns
         Depending on the 'data_type' parameter, it returns different tuples.
+        
         For data_type == 'Image':
-        - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
-        - cellContact_DEGs: Names of cell-contact DEGs.
-        - logRatio1_cellContact: Log-ratio values for cell-contact DEGs (comparison 1).
-        - pvalue1_cellContact: p-values for cell-contact DEGs (comparison 1).
-        - fdr1_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 1).
-        - logRatio1_total: Log-ratio values for all genes.
-        - pvalue1_total: p-values for all genes.
-        - fdr1_total: False discovery rate (FDR) for all genes.
+
+        cellContact_DEGs_IDX
+            Indices of cell-contact DEGs.
+        cellContact_DEGs
+            Names of cell-contact DEGs.
+        logRatio1_cellContact
+            Log-ratio values for cell-contact DEGs (comparison 1).
+        pvalue1_cellContact
+            p-values for cell-contact DEGs (comparison 1).
+        fdr1_cellContact
+            False discovery rate (FDR) for cell-contact DEGs (comparison 1).
+        logRatio1_total
+            Log-ratio values for all genes.
+        pvalue1_total
+            p-values for all genes.
+        fdr1_total
+            False discovery rate (FDR) for all genes.
 
         For data_type == 'NGS':
-        - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
-        - cellContact_DEGs: Names of cell-contact DEGs.
-        - logRatio1_cellContact: Log-ratio values for cell-contact DEGs (comparison 1).
-        - pvalue1_cellContact: p-values for cell-contact DEGs (comparison 1).
-        - fdr1_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 1).
-        - logRatio2_cellContact: Log-ratio values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
-        - pvalue2_cellContact: p-values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
-        - fdr2_cellContact: False discovery rate (FDR) for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
-        - logRatio_null_cellContact: Log-ratio values for null DEGs (cell-contact) (only for data_type = 'NGS').
-        - fdr_null_cellContact: False discovery rate (FDR) for null DEGs (cell-contact) (only for data_type = 'NGS').
-        - logRatio1_total: Log-ratio values for all genes.
-        - pvalue1_total: p-values for all genes.
-        - fdr1_total: False discovery rate (FDR) for all genes.
+        
+        cellContact_DEGs_IDX 
+            Indices of cell-contact DEGs.
+        cellContact_DEGs
+            Names of cell-contact DEGs.
+        logRatio1_cellContact
+            Log-ratio values for cell-contact DEGs (comparison 1).
+        pvalue1_cellContact
+            p-values for cell-contact DEGs (comparison 1).
+        fdr1_cellContact
+            False discovery rate (FDR) for cell-contact DEGs (comparison 1).
+        logRatio2_cellContact
+            Log-ratio values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
+        pvalue2_cellContact
+            p-values for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
+        fdr2_cellContact
+            False discovery rate (FDR) for cell-contact DEGs (comparison 2) (only for data_type = 'NGS').
+        logRatio_null_cellContact 
+            Log-ratio values for null DEGs (cell-contact) (only for data_type = 'NGS').
+        fdr_null_cellContact
+            False discovery rate (FDR) for null DEGs (cell-contact) (only for data_type = 'NGS').
+        logRatio1_total
+            Log-ratio values for all genes.
+        pvalue1_total
+            p-values for all genes.
+        fdr1_total
+            False discovery rate (FDR) for all genes.
 
     """
     
@@ -537,22 +605,35 @@ def get_heatmap(data_type, center_celltype, clusterSelect, matchComb, neiCombUni
     """
     Plot heatmaps for the given data.
 
-    Parameters:
-        - data_type: Type of data ('Image' or 'NGS').
-        - center_celltype: Center cell type.
-        - clusterSelect: List of cluster select values.
-        - matchComb: Array of match combinations.
-        - neiCombUnique: List of unique neighbor combinations.
-        - log_data: Log data.
-        - log_data_zvalue: Z-value of log data.
-        - gene_name: List of gene names.
-        - cell_id: List of cell IDs.
-        - cellContact_DEGs_IDX: Indices of cell-contact DEGs.
-        - logRatio1_cellContact: Log ratio 1 of cell-contact.
-        - logRatio2_cellContact: Log ratio 2 of cell-contact.
-        - folderName2: Folder name to save the files.
+    Parameters
+        data_type
+            Type of data ('Image' or 'NGS').
+        center_celltype
+            Center cell type.
+        clusterSelect
+            List of cluster select values.
+        matchComb
+            Array of match combinations.
+        neiCombUnique
+            List of unique neighbor combinations.
+        log_data
+            Log data.
+        log_data_zvalue
+            Z-value of log data.
+        gene_name
+            List of gene names.
+        cell_id
+            List of cell IDs.
+        cellContact_DEGs_IDX
+            Indices of cell-contact DEGs.
+        logRatio1_cellContact
+            Log ratio 1 of cell-contact.
+        logRatio2_cellContact
+            Log ratio 2 of cell-contact.
+        folderName2
+            Folder name to save the files.
 
-    Returns:
+    Returns
         None
     """
     
@@ -750,6 +831,9 @@ def get_heatmap(data_type, center_celltype, clusterSelect, matchComb, neiCombUni
         # Adjust the plot layout to avoid overlapping elements
         plt.tight_layout()
         
+        # Display the plot
+        plt.show(block=False)
+        
         # Assign a filename for the heatmap plot
         filename_heatmap = center_celltype
         
@@ -761,16 +845,23 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
     """
     Generate a volcano plot based on the input DataFrame.
 
-    Parameters:
-        df: The input DataFrame containing the data.
-        data_type: Choose between Image and NGS.
-        cneter_celltype: Center cell type.
-        pCutoff: Cutoff value for p-value.
-        lrCutoff: Cutoff value for log-ratio.
-        top_genes: The number of top genes annotated in the volcano plot.
-        folderName2: Folder name to save the files.
+    Parameters
+        df
+            The input DataFrame containing the data.
+        data_type 
+            Choose between Image and NGS.
+        cneter_celltype
+            Center cell type.
+        pCutoff
+            Cutoff value for p-value.
+        lrCutoff
+            Cutoff value for log-ratio.
+        top_genes
+            The number of top genes annotated in the volcano plot.
+        folderName2
+            Folder name to save the files.
 
-    Returns:
+    Returns
         None        
     """
 
@@ -877,18 +968,24 @@ def get_volcano_plot(df, data_type, center_celltype, pCutoff, lrCutoff, top_gene
     plt.axvline(lrCutoff,color="grey",linestyle="--")
     plt.axhline(-np.log10(pCutoff),color="grey",linestyle="--")
     
+    # Display the plot
+    plt.show(block=False)
+    
+    # Save the plot
     fig.savefig(f"{folderName2}/{filename_volcano}_volcano.pdf", dpi=300)
 
 
 def delete_files_with_keyword(directory, keyword):
     """
-    Deletes files in the specified directory that contain the given keyword in their filenames.
+    Delete files in the specified directory that contain the given keyword in their filenames.
 
-    Parameters:
-        directory: The path of the directory containing the files.
-        keyword: The keyword to search for in the filenames.
+    Parameters
+        directory
+            The path of the directory containing the files.
+        keyword
+            The keyword to search for in the filenames.
 
-    Returns:
+    Returns
         None
     """
 
@@ -905,27 +1002,41 @@ def delete_files_with_keyword(directory, keyword):
                 print(f"Error while deleting {file_path}: {e}")
 
 
-def analyze_data(df_cell_id:pd.DataFrame, df_gene_name:pd.DataFrame, df_log_data:pd.DataFrame, path_categorization:str, data_type:str, lrCutoff:float, pCutoff:float, pCutoff2:float, direction:str, normality_test:bool, top_genes:int, save:bool, root ='DE_results/'):
+def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, data_type, lrCutoff, pCutoff, pCutoff2, direction, normality_test:bool, top_genes, save:bool, root ='DE_results/'):
     """
     Function to perform neighbor-dependent gene expression analysis.
     
-    Parameters:
-        df_cell_id (pd.DataFrame): DataFrame containing cell IDs.
-        df_gene_name (pd.DataFrame): DataFrame containing gene names.
-        df_log_data (pd.DataFrame): DataFrame containing log-transformed data.
-        path_categorization (str): Path to categorization files.
-        data_type (str): Type of data (either "Image" or "NGS").
-        lrCutoff (float): Log ratio cutoff value.
-        pCutoff (float): p-value cutoff value.
-        pCutoff2 (float): Secondary p-value cutoff value.
-        direction (str): Direction of analysis (e.g., "upregulated", "downregulated").
-        normality_test (str): Type of normality test to use.
-        top_genes (int): Number of top genes to consider.
-        save (bool): Flag indicating whether to save the results.
-        root (str, optional): Root folder to save results. Default is 'DE_results/'.
+    Parameters
+        df_cell_id
+            DataFrame containing cell IDs.
+        df_gene_name 
+            DataFrame containing gene names.
+        df_log_data 
+            DataFrame containing log-transformed data.
+        path_categorization 
+            Path to categorization files.
+        data_type (str)
+            Type of data (either "Image" or "NGS").
+        lrCutoff (float)
+            Log ratio cutoff value.
+        pCutoff (float)
+            p-value cutoff value.
+        pCutoff2 (float)
+            Secondary p-value cutoff value.
+        direction (str)
+            Direction of analysis (e.g., "upregulated", "downregulated").
+        normality_test (bool)
+            Type of normality test to use.
+        top_genes (int)
+            Number of top genes to consider.
+        save (bool)
+            Flag indicating whether to save the results.
+        root 
+            Root folder to save results. Default is 'DE_results/'.
         
-    Returns:
-        total_df (pd.DataFrame): DataFrame containing aggregated results.
+    Returns
+        total_df 
+            DataFrame containing aggregated results.
     """
 
     # Initialize lists to store the results

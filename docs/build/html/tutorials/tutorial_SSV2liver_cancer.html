@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Identifying neighbor-dependent genes from Slide-seq data in mouse liver cancer &mdash; CellNeighborEX 0.0.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/nbsphinx-code-cells.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=282f96c0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Identifying neighbor-dependent genes from Slide-seq data in mouse hippocampus" href="tutorial_SSV2hippocampus.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CellNeighborEX
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../tutorials.html">Tutorials</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="tutorial_seqFISH.html">Identifying neighbor-dependent genes from seqFISH data in a mouse embryo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial_SSV2embryo.html">Identifying neighbor-dependent genes from Slide-seq data in a mouse embryo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial_SSV2hippocampus.html">Identifying neighbor-dependent genes from Slide-seq data in mouse hippocampus</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Identifying neighbor-dependent genes from Slide-seq data in mouse liver cancer</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#Import-packages">Import packages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Download-data">Download data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Load-data">Load data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Categorize-Slide-seq-beads-into-heterotypic-spots-and-homotypic-spots">Categorize Slide-seq beads into heterotypic spots and homotypic spots</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#Generate-data-files-categorized-per-cell-type">Generate data files categorized per cell type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#Get-log-normalized-expression-data">Get log-normalized expression data</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#Perform-neighbor-dependent-gene-expression-analysis">Perform neighbor-dependent gene expression analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#Visualize-neighbor-dependent-gene-expression-in-the-spatial-context">Visualize neighbor-dependent gene expression in the spatial context</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CellNeighborEX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../tutorials.html">Tutorials</a></li>
+      <li class="breadcrumb-item active">Identifying neighbor-dependent genes from Slide-seq data in mouse liver cancer</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorials/tutorial_SSV2liver_cancer.ipynb.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="Identifying-neighbor-dependent-genes-from-Slide-seq-data-in-mouse-liver-cancer">
+<h1>Identifying neighbor-dependent genes from Slide-seq data in mouse liver cancer<a class="headerlink" href="#Identifying-neighbor-dependent-genes-from-Slide-seq-data-in-mouse-liver-cancer" title="Link to this heading"></a></h1>
+<section id="Import-packages">
+<h2>Import packages<a class="headerlink" href="#Import-packages" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">os</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">CellNeighborEX</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Version:&#39;</span><span class="p">,</span> <span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Version: 0.0.5
+</pre></div></div>
+</div>
+</section>
+<section id="Download-data">
+<h2>Download data<a class="headerlink" href="#Download-data" title="Link to this heading"></a></h2>
+<p>In this tutorial, we use the mouse liver cancer Slide-seq data. The dataset was obtained from Single Cell Portal (<a class="reference external" href="https://singlecell.broadinstitute.org/single_cell/study/SCP1278/spatial-genomics-enables-multi-modal-study-of-clonal-heterogeneity-in-tissues">https://singlecell.broadinstitute.org/single_cell/study/SCP1278/spatial-genomics-enables-multi-modal-study-of-clonal-heterogeneity-in-tissues</a>). We provide (i) pre-processed expression data in txt format, and (ii) data files regarding annotated cell types in csv format.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the path of your root directory.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;/Users/kimh15/Downloads&#39;
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a folder to save data files.</span>
+<span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;Datasets&#39;</span><span class="p">):</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s1">&#39;Datasets&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download data files.</span>
+<span class="c1"># (i) pre-processed expression data</span>
+<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42334083<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_log_data.txt
+<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42334077<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_cell_id.txt
+<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42334080<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_gene_name.txt
+
+<span class="c1"># (ii) data files regarding annotated cell types</span>
+<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42333705<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_RCTD.csv
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+--2023-09-13 02:12:13--  https://figshare.com/ndownloader/files/42334083
+Resolving figshare.com (figshare.com)... 52.50.184.124, 52.215.42.80
+Connecting to figshare.com (figshare.com)|52.50.184.124|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334083/SSliver_log_data.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091214Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe513216564b9b845c0a59c8c95f69cb7094a2892a32a24f3176c0e3594aacee [following]
+--2023-09-13 02:12:14--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334083/SSliver_log_data.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091214Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe513216564b9b845c0a59c8c95f69cb7094a2892a32a24f3176c0e3594aacee
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.21.218, 52.92.34.144, 52.218.28.107, ...
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.21.218|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 412576983 (393M) [text/plain]
+Saving to: ‘Datasets/SSliver_log_data.txt’
+
+Datasets/SSliver_lo 100%[===================&gt;] 393.46M  17.2MB/s    in 23s
+
+2023-09-13 02:12:39 (16.9 MB/s) - ‘Datasets/SSliver_log_data.txt’ saved [412576983/412576983]
+
+--2023-09-13 02:12:39--  https://figshare.com/ndownloader/files/42334077
+Resolving figshare.com (figshare.com)... 52.215.42.80, 52.50.184.124
+Connecting to figshare.com (figshare.com)|52.215.42.80|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334077/SSliver_cell_id.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091240Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=b80473a58f3a5b9d112e060fb33b42a9a6fda43878149eb4c81b65c2141c3444 [following]
+--2023-09-13 02:12:40--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334077/SSliver_cell_id.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091240Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=b80473a58f3a5b9d112e060fb33b42a9a6fda43878149eb4c81b65c2141c3444
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.92.2.112, 52.218.36.178, 52.218.96.250, ...
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.92.2.112|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 342615 (335K) [text/plain]
+Saving to: ‘Datasets/SSliver_cell_id.txt’
+
+Datasets/SSliver_ce 100%[===================&gt;] 334.58K   504KB/s    in 0.7s
+
+2023-09-13 02:12:42 (504 KB/s) - ‘Datasets/SSliver_cell_id.txt’ saved [342615/342615]
+
+--2023-09-13 02:12:42--  https://figshare.com/ndownloader/files/42334080
+Resolving figshare.com (figshare.com)... 52.50.184.124, 52.215.42.80
+Connecting to figshare.com (figshare.com)|52.50.184.124|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334080/SSliver_gene_name.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091243Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a9344167a9779e0f875b25e5b6bb38f29bddc39d5957fda820f6ab0b00ab0c06 [following]
+--2023-09-13 02:12:43--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334080/SSliver_gene_name.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091243Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a9344167a9779e0f875b25e5b6bb38f29bddc39d5957fda820f6ab0b00ab0c06
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.0.43, 52.218.36.178, 52.218.96.250, ...
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.0.43|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 13897 (14K) [text/plain]
+Saving to: ‘Datasets/SSliver_gene_name.txt’
+
+Datasets/SSliver_ge 100%[===================&gt;]  13.57K  --.-KB/s    in 0.03s
+
+2023-09-13 02:12:44 (470 KB/s) - ‘Datasets/SSliver_gene_name.txt’ saved [13897/13897]
+
+--2023-09-13 02:12:44--  https://figshare.com/ndownloader/files/42333705
+Resolving figshare.com (figshare.com)... 52.50.184.124, 52.215.42.80
+Connecting to figshare.com (figshare.com)|52.50.184.124|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42333705/SSliver_RCTD.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091245Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=1282c94e22cab9508e0f4e016efe87a9011e759ec87d799e1e3c93f0cc67aaab [following]
+--2023-09-13 02:12:45--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42333705/SSliver_RCTD.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091245Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=1282c94e22cab9508e0f4e016efe87a9011e759ec87d799e1e3c93f0cc67aaab
+Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.30.19, 52.218.36.178, 52.218.26.35, ...
+Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.30.19|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1633094 (1.6M) [text/csv]
+Saving to: ‘Datasets/SSliver_RCTD.csv’
+
+Datasets/SSliver_RC 100%[===================&gt;]   1.56M  1.61MB/s    in 1.0s
+
+2023-09-13 02:12:47 (1.61 MB/s) - ‘Datasets/SSliver_RCTD.csv’ saved [1633094/1633094]
+
+</pre></div></div>
+</div>
+</section>
+<section id="Load-data">
+<h2>Load data<a class="headerlink" href="#Load-data" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the path of data files regarding annotated cell types.</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/Datasets/&#39;</span>
+<span class="n">df_processed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;SSliver_RCTD.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_processed</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>barcode</th>
+      <th>first_type</th>
+      <th>second_type</th>
+      <th>celltype1</th>
+      <th>celltype2</th>
+      <th>x</th>
+      <th>y</th>
+      <th>prop1</th>
+      <th>prop2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>CTTGTGGTTGCAGA</td>
+      <td>6</td>
+      <td>2</td>
+      <td>TumorIII</td>
+      <td>Monocyte</td>
+      <td>3670.6</td>
+      <td>2839.7</td>
+      <td>0.532488</td>
+      <td>0.149015</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>TTTTTTTTTTTTTT</td>
+      <td>5</td>
+      <td>2</td>
+      <td>HepatocyteI</td>
+      <td>Monocyte</td>
+      <td>2584.0</td>
+      <td>1702.6</td>
+      <td>0.470880</td>
+      <td>0.099647</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>ACATGTCTATGTTA</td>
+      <td>5</td>
+      <td>1</td>
+      <td>HepatocyteI</td>
+      <td>HepatocyteII</td>
+      <td>5226.2</td>
+      <td>4028.4</td>
+      <td>0.737157</td>
+      <td>0.261249</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>GCGCTTTCGTTCCA</td>
+      <td>5</td>
+      <td>1</td>
+      <td>HepatocyteI</td>
+      <td>HepatocyteII</td>
+      <td>4708.4</td>
+      <td>1851.7</td>
+      <td>0.825412</td>
+      <td>0.167525</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>ACAATTGTCTGCAC</td>
+      <td>4</td>
+      <td>4</td>
+      <td>TumorII</td>
+      <td>TumorII</td>
+      <td>1385.5</td>
+      <td>4176.6</td>
+      <td>0.745914</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+</section>
+<section id="Categorize-Slide-seq-beads-into-heterotypic-spots-and-homotypic-spots">
+<h2>Categorize Slide-seq beads into heterotypic spots and homotypic spots<a class="headerlink" href="#Categorize-Slide-seq-beads-into-heterotypic-spots-and-homotypic-spots" title="Link to this heading"></a></h2>
+<section id="Generate-data-files-categorized-per-cell-type">
+<h3>Generate data files categorized per cell type<a class="headerlink" href="#Generate-data-files-categorized-per-cell-type" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># All categorzied input files are saved in the &quot;categorized_data folder&quot; in the root directory.</span>
+<span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">categorization</span><span class="o">.</span><span class="n">generate_input_files</span><span class="p">(</span><span class="n">data_type</span> <span class="o">=</span> <span class="s2">&quot;NGS&quot;</span><span class="p">,</span> <span class="n">df</span> <span class="o">=</span> <span class="n">df_processed</span><span class="p">,</span> <span class="n">sample_size</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">min_sample_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the path of the directory where all the categorized data files are saved.</span>
+<span class="n">path_categorization</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/categorized_data/&#39;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Get-log-normalized-expression-data">
+<h3>Get log-normalized expression data<a class="headerlink" href="#Get-log-normalized-expression-data" title="Link to this heading"></a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the data into dataframes.</span>
+<span class="n">df_cell_id</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;SSliver_cell_id.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df_gene_name</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;SSliver_gene_name.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">df_log_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;SSliver_log_data.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_log_data</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>...</th>
+      <th>22831</th>
+      <th>22832</th>
+      <th>22833</th>
+      <th>22834</th>
+      <th>22835</th>
+      <th>22836</th>
+      <th>22837</th>
+      <th>22838</th>
+      <th>22839</th>
+      <th>22840</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.000000</td>
+      <td>0.449814</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.000000</td>
+      <td>1.483449</td>
+      <td>1.985866</td>
+      <td>0.943372</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>1.046288</td>
+      <td>0.0</td>
+      <td>4.474934</td>
+      <td>1.11336</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1.250002</td>
+      <td>0.449814</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.506298</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.739018</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.000000</td>
+      <td>0.449814</td>
+      <td>0.000000</td>
+      <td>0.943372</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2.739018</td>
+      <td>2.962621</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 22841 columns</p>
+</div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># The length of df_processed must be the same as the length of df_cell_id.</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_cell_id</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df_processed</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+22841
+22841
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Perform-neighbor-dependent-gene-expression-analysis">
+<h2>Perform neighbor-dependent gene expression analysis<a class="headerlink" href="#Perform-neighbor-dependent-gene-expression-analysis" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set argument values for CellNeighborEX.DEanalysis.analyze_data().</span>
+<span class="n">data_type</span> <span class="o">=</span> <span class="s2">&quot;NGS&quot;</span>  <span class="c1"># Image: image-based ST data, NGS: NGS-based ST data</span>
+<span class="n">lrCutoff</span> <span class="o">=</span> <span class="mf">0.4</span> <span class="c1"># log ratio</span>
+<span class="n">pCutoff</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># p-value</span>
+<span class="n">pCutoff2</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="c1"># false discovery rate</span>
+<span class="n">direction</span> <span class="o">=</span> <span class="s1">&#39;up&#39;</span> <span class="c1"># up: up-reguated genes, down: down-regulated genes</span>
+<span class="n">normality_test</span> <span class="o">=</span> <span class="kc">False</span> <span class="c1"># True: depending on the result of the normality test, the statistical test is determined. If the data is normal, the parametric test is used. Otherwise, the non-parametric test is used.</span>
+                       <span class="c1"># False: when sample size (number of cells/spots) is larger than 30, the parameteric test is used. Otherwise, the non-parametric test is used.</span>
+<span class="n">top_genes</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Top 10 DEGs are annotated in the volcano plot.</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># If save=True, all result files are saved in the &quot;DE_results&quot; folder in the root directory.</span>
+<span class="n">DEG_list</span> <span class="o">=</span> <span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">DEanalysis</span><span class="o">.</span><span class="n">analyze_data</span><span class="p">(</span><span class="n">df_cell_id</span><span class="p">,</span> <span class="n">df_gene_name</span><span class="p">,</span> <span class="n">df_log_data</span><span class="p">,</span> <span class="n">path_categorization</span><span class="p">,</span> <span class="n">data_type</span><span class="p">,</span> <span class="n">lrCutoff</span><span class="p">,</span> <span class="n">pCutoff</span><span class="p">,</span> <span class="n">pCutoff2</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">normality_test</span><span class="p">,</span> <span class="n">top_genes</span><span class="p">,</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:   0%|          | 0/26 [00:00&lt;?, ?it/s]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:   4%|▍         | 1/26 [00:08&lt;03:24,  8.17s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_5.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_5.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_7.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_7.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:   8%|▊         | 2/26 [00:21&lt;04:23, 10.99s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  12%|█▏        | 3/26 [00:27&lt;03:24,  8.89s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+3
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_13.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_13.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_15.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_15.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  15%|█▌        | 4/26 [00:35&lt;03:11,  8.69s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_19.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_19.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_21.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_21.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  19%|█▉        | 5/26 [00:44&lt;03:05,  8.83s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+5
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  23%|██▎       | 6/26 [00:47&lt;02:14,  6.71s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+6
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  27%|██▋       | 7/26 [00:53&lt;02:02,  6.42s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+7
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_29.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_29.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_31.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_31.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  31%|███       | 8/26 [01:06&lt;02:31,  8.42s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+8
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  35%|███▍      | 9/26 [01:14&lt;02:25,  8.55s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+9
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  38%|███▊      | 10/26 [01:17&lt;01:48,  6.78s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+10
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_39.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_39.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_41.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_41.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  42%|████▏     | 11/26 [01:29&lt;02:04,  8.33s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+11
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_45.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_45.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_47.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_47.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  46%|████▌     | 12/26 [01:39&lt;02:03,  8.85s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  50%|█████     | 13/26 [01:42&lt;01:30,  6.94s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+13
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  54%|█████▍    | 14/26 [01:45&lt;01:08,  5.72s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+14
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  58%|█████▊    | 15/26 [01:47&lt;00:53,  4.83s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+15
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  62%|██████▏   | 16/26 [01:54&lt;00:54,  5.49s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+16
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  65%|██████▌   | 17/26 [01:57&lt;00:42,  4.72s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+17
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  69%|██████▉   | 18/26 [02:05&lt;00:44,  5.62s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+18
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  73%|███████▎  | 19/26 [02:10&lt;00:37,  5.41s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+19
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  77%|███████▋  | 20/26 [02:17&lt;00:34,  5.83s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+20
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  81%|████████  | 21/26 [02:19&lt;00:24,  4.90s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+21
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_69.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_69.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_71.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_71.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  85%|████████▍ | 22/26 [02:39&lt;00:37,  9.31s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+22
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  88%|████████▊ | 23/26 [02:45&lt;00:25,  8.37s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+23
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+neighbor-dependent gene expression analysis:  92%|█████████▏| 24/26 [02:52&lt;00:16,  8.01s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+24
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_79.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_79.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_81.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_81.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  96%|█████████▌| 25/26 [03:03&lt;00:08,  8.91s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+25
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_85.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_85.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_87.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_87.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis: 100%|██████████| 26/26 [03:11&lt;00:00,  7.38s/it]
+</pre></div></div>
+</div>
+</section>
+<section id="Visualize-neighbor-dependent-gene-expression-in-the-spatial-context">
+<h2>Visualize neighbor-dependent gene expression in the spatial context<a class="headerlink" href="#Visualize-neighbor-dependent-gene-expression-in-the-spatial-context" title="Link to this heading"></a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a cell type and a DEG for spatial visualization and then load the data.</span>
+<span class="c1"># For example, F13a1 is one of up-regulated genes identified from the heterotypic spots of TumorIII+Monocyte.</span>
+<span class="n">path_selected</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/DE_results/TumorIII+Monocyte/&#39;</span>
+<span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;barcode&#39;</span><span class="p">,</span> <span class="s1">&#39;logdata&#39;</span><span class="p">,</span> <span class="s1">&#39;zscore&#39;</span><span class="p">]</span>
+<span class="n">heterotypic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;TumorIII+Monocyte_F13a1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
+<span class="n">homotypic1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;TumorIII+TumorIII_F13a1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
+<span class="n">homotypic2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;Monocyte+Monocyte_F13a1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
+<span class="n">heterotypic</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;TumorIII+Monocyte&#39;</span>
+<span class="n">homotypic1</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;TumorIII+TumorIII&#39;</span>
+<span class="n">homotypic2</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Monocyte+Monocyte&#39;</span>
+<span class="n">df_exp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">heterotypic</span><span class="p">,</span> <span class="n">homotypic1</span><span class="p">,</span> <span class="n">homotypic2</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set parameter values.</span>
+<span class="n">df_bg</span><span class="p">,</span> <span class="n">df_red</span><span class="p">,</span> <span class="n">df_blue</span><span class="p">,</span> <span class="n">df_black</span> <span class="o">=</span> <span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">set_parameters</span><span class="p">(</span><span class="n">df_processed</span><span class="p">,</span> <span class="n">df_exp</span><span class="p">,</span> <span class="n">beadsize_bg</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">edgecolor_bg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">),</span> <span class="n">beadcolor_bg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">),</span> <span class="n">beadsize_red</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span> <span class="n">beadsize_blue</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">beadsize_black</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">type_red</span><span class="o">=</span><span class="s1">&#39;TumorIII+Monocyte&#39;</span><span class="p">,</span> <span class="n">type_blue</span><span class="o">=</span><span class="s1">&#39;TumorIII+TumorIII&#39;</span><span class="p">,</span> <span class="n">type_black</span><span class="o">=</span><span class="s1">&#39;Monocyte+Monocyte&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the spatial map.</span>
+<span class="c1"># zorder_red, zorder_blue, and zorder_black are parameters that determine the drawing order in the spatial map.</span>
+<span class="c1"># If save=True, the spatial map is saved in the &quot;spatialMap&quot; folder in the root directory.</span>
+<span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">get_spatialPlot</span><span class="p">(</span><span class="n">df_bg</span><span class="p">,</span> <span class="n">df_red</span><span class="p">,</span> <span class="n">df_blue</span><span class="p">,</span> <span class="n">df_black</span><span class="p">,</span> <span class="n">label_red</span><span class="o">=</span><span class="s1">&#39;TumorIII+Monocyte&#39;</span><span class="p">,</span> <span class="n">label_blue</span><span class="o">=</span><span class="s1">&#39;TumorIII&#39;</span><span class="p">,</span> <span class="n">label_black</span><span class="o">=</span><span class="s1">&#39;Monocyte&#39;</span><span class="p">,</span> <span class="n">label_gene</span><span class="o">=</span><span class="s1">&#39;F13a1&#39;</span><span class="p">,</span> <span class="n">zorder_red</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">zorder_blue</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">zorder_black</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">28</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_25_0.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_25_0.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorial_SSV2hippocampus.html" class="btn btn-neutral float-left" title="Identifying neighbor-dependent genes from Slide-seq data in mouse hippocampus" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Hyobin Kim.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

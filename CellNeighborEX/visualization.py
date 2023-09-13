@@ -5,15 +5,17 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
 
-def import_expdata(path:str):
+def import_expdata(path):
     """
     Import expression data from CSV files in the specified directory.
 
-    Parameters:
-        path (str): Path to the expression data directory.
+    Parameters
+        path 
+            Path to the expression data directory.
 
-    Returns:
-        df (pd.DataFrame): DataFrame containing the merged expression data.
+    Returns
+        df
+            DataFrame containing the merged expression data.
     """
 
     # Initialize an empty DataFrame to store the merged expression data
@@ -43,28 +45,43 @@ def import_expdata(path:str):
     return df
 
 
-def set_parameters(df_processed:pd.DataFrame, df_exp:pd.DataFrame, beadsize_bg:float, edgecolor_bg:tuple, beadcolor_bg:tuple, beadsize_red:float, beadsize_blue:float, beadsize_black:float, type_red:str , type_blue:str, type_black:str):
+def set_parameters(df_processed, df_exp, beadsize_bg, edgecolor_bg, beadcolor_bg, beadsize_red, beadsize_blue, beadsize_black, type_red , type_blue, type_black):
     """
     Set parameters for the processed DataFrame based on the expression data.
 
-     Parameters:
-        df_processed (pd.DataFrame): DataFrame to be processed.
-        df_exp (pd.DataFrame): DataFrame containing the expression data.
-        beadsize_bg (float): Bead size for the background.
-        edgecolor_bg (tuple): Edge color for the background.
-        beadcolor_bg (tuple): Bead color for the background.
-        beadsize_red (float): Bead size for cells of type red.
-        beadsize_blue (float): Bead size for cells of type blue.
-        beadsize_black (float): Bead size for cells of type black.
-        type_red (str): Type name for cells of type red.
-        type_blue (str): Type name for cells of type blue.
-        type_black (str): Type name for cells of type black.
+     Parameters
+        df_processed 
+            DataFrame to be processed.
+        df_exp 
+            DataFrame containing the expression data.
+        beadsize_bg (float)
+            Bead size for the background.
+        edgecolor_bg (tuple)
+            Edge color for the background.
+        beadcolor_bg (tuple)
+            Bead color for the background.
+        beadsize_red (float)
+            Bead size for cells of type red.
+        beadsize_blue (float)
+            Bead size for cells of type blue.
+        beadsize_black (float)
+            Bead size for cells of type black.
+        type_red (str) 
+            Type name for cells of type red.
+        type_blue (str)
+            Type name for cells of type blue.
+        type_black (str)
+            Type name for cells of type black.
 
-    Returns:
-        df_processed (pd.DataFrame): Processed DataFrame with updated parameters.
-        df_red (pd.DataFrame): Subset of df_processed containing cells of type red.
-        df_blue (pd.DataFrame): Subset of df_processed containing cells of type blue.
-        df_black (pd.DataFrame): Subset of df_processed containing cells of type black.
+    Returns
+        df_processed 
+            Processed DataFrame with updated parameters.
+        df_red 
+            Subset of df_processed containing cells of type red.
+        df_blue 
+            Subset of df_processed containing cells of type blue.
+        df_black
+            Subset of df_processed containing cells of type black.
     """
     
     # Set parameter values of df_processed
@@ -76,7 +93,7 @@ def set_parameters(df_processed:pd.DataFrame, df_exp:pd.DataFrame, beadsize_bg:f
         df_processed['beadcolor'][idx] = edgecolor_bg  
 
     df_processed['type'] = 'NA'
-    df_processed['expression'] = (np.max(df_exp['zscore'])-np.min(df_exp['zscore']))/2  # The colors of cells or beads (background) with gray edges are set to white
+    df_processed['expression'] = (np.max(df_exp['zscore'])-abs(np.min(df_exp['zscore'])))/2  # The colors of cells or beads (background) with gray edges are set to white
     
     for idx in range(len(df_processed)):
 
@@ -107,27 +124,41 @@ def set_parameters(df_processed:pd.DataFrame, df_exp:pd.DataFrame, beadsize_bg:f
 
     return df_processed, df_red, df_blue, df_black            
 
-def get_spatialPlot(df_bg:pd.DataFrame, df_red:pd.DataFrame, df_blue:pd.DataFrame, df_black:pd.DataFrame, label_red:str, label_blue:str, label_black:str, label_gene:str, figsize:tuple, save:bool, root='spatialMap/', zorder_red=2.0, zorder_blue=2.0, zorder_black=2.0):
+def get_spatialPlot(df_bg, df_red, df_blue, df_black, label_red, label_blue, label_black, label_gene, figsize, save:bool, root='spatialMap/', zorder_red=2.0, zorder_blue=2.0, zorder_black=2.0):
     """
     Generate a spatial plot using the provided DataFrames and parameters.
 
-     Parameters:
-        df_bg (pd.DataFrame): DataFrame for the background.
-        df_red (pd.DataFrame): DataFrame for cells of type red.
-        df_blue (pd.DataFrame): DataFrame for cells of type blue.
-        df_black (pd.DataFrame): DataFrame for cells of type black.
-        label_red (str): Label for cells of type red in the legend.
-        label_blue (str): Label for cells of type blue in the legend.
-        label_black (str): Label for cells of type black in the legend.
-        label_gene (str): Label for the gene expression in the colorbar title.
-        zorder_red (float, optional): drawing order for cells of type red.
-        zorder_blue (float, optional): drawing order for cells of type blue.
-        zorder_black (float, optional): drawing order for cells of type black.
-        figsize (tuple): Size of the figure (width, height).
-        save (bool): Flag indicating whether to save the plot.
-        root (str): Root directory for saving the plot.
+     Parameters
+        df_bg 
+            DataFrame for the background.
+        df_red 
+            DataFrame for cells of type red.
+        df_blue 
+            DataFrame for cells of type blue.
+        df_black 
+            DataFrame for cells of type black.
+        label_red (str) 
+            Label for cells of type red in the legend.
+        label_blue (str)
+            Label for cells of type blue in the legend.
+        label_black (str)
+            Label for cells of type black in the legend.
+        label_gene (str)
+            Label for the gene expression in the colorbar title.
+        zorder_red (float)
+            drawing order for cells of type red (default is 2.0).
+        zorder_blue (float)
+            drawing order for cells of type blue (default is 2.0).
+        zorder_black (float)
+            drawing order for cells of type black (default is 2.0).
+        figsize (tuple)
+            Size of the figure (width, height).
+        save (bool)
+            Flag indicating whether to save the plot.
+        root 
+            Root directory for saving the plot.
 
-    Returns:
+    Returns
         None
     """
     

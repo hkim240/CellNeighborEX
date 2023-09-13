@@ -8,19 +8,25 @@ import os
 import math
 from tqdm import tqdm
 import matplotlib.pyplot as plt
+import seaborn as sns
+sns.set_theme()
 
 
-def create_dataframe(adata:anndata, coord_key:str, celltype_key:str):
+def create_dataframe(adata, coord_key, celltype_key):
     """
     Create a DataFrame from the provided AnnData object.
 
-    Parameters:
-        adata (AnnData): AnnData object containing the dataset.
-        celltype_key (str): Key to access the cell type information in `adata.obs`.
-        coord_key (str): Key to access the spatial coordinates in `adata.obsm`.
+    Parameters
+        adata 
+            AnnData object containing the dataset.
+        celltype_key 
+            Key to access the cell type information in `adata.obs`.
+        coord_key 
+            Key to access the spatial coordinates in `adata.obsm`.
 
-    Returns:
-        df (DataFrame): Constructed DataFrame with barcode, cell type, coordinates, and additional columns.
+    Returns
+        df 
+            Constructed DataFrame with barcode, cell type, coordinates, and additional columns.
     """
 
     # Create a DataFrame for barcode
@@ -49,20 +55,27 @@ def create_dataframe(adata:anndata, coord_key:str, celltype_key:str):
     return df
 
 
-def detect_neighbors(adata:anndata, coord_key:str, type:str, knn:int, radius_value:float, delaunay:bool):
+def detect_neighbors(adata, coord_key, type, knn, radius_value, delaunay):
     """
     Detect the spatial neighbors using squidpy and retrieve the spatial connectivity matrix.
 
-    Parameters:
-        adata (AnnData): Loaded dataset.
-        coord_key (str): Key to access the spatial coordinates in `adata.obsm`.
-        type (str): Type of spatial coordinates, either 'generic' or 'grid'.
-        knn (int): Number of nearest neighbors to consider for connectivity.
-        radius_value (float): Radius to define the spatial connectivity.
-        delaunay (bool): Flag indicating whether to use Delaunay triangulation for connectivity.
+    Parameters
+        adata 
+            Loaded dataset.
+        coord_key 
+            Key to access the spatial coordinates in `adata.obsm`.
+        type 
+            Type of spatial coordinates, either 'generic' or 'grid'.
+        knn 
+            Number of nearest neighbors to consider for connectivity.
+        radius_value 
+            Radius to define the spatial connectivity.
+        delaunay 
+            Flag indicating whether to use Delaunay triangulation for connectivity.
 
-    Returns:
-        matrix (sparse matrix): Spatial connectivity matrix.
+    Returns
+        matrix
+            Spatial connectivity matrix (sparse matrix).
     """
 
     # Detect neighbors via Delaunay triangulation, KNN, or radius
@@ -80,15 +93,21 @@ def detect_neighbors(adata:anndata, coord_key:str, type:str, knn:int, radius_val
     return matrix
 
 
-def calculate_closest_distance(df:pd.DataFrame):
+def calculate_closest_distance(df, save:bool, root ='neighbor_info/'):
     """
     Calculate the closest distance between cells in the DataFrame.
 
-    Parameters:
-        df (pd.DataFrame): A pandas DataFrame containing 'x' and 'y' columns representing cell coordinates.
+    Parameters
+        df 
+            A pandas DataFrame containing 'x' and 'y' columns representing cell coordinates.
+        save (bool)
+            Flag indicating whether to save the dataframe.
+        root
+            Root directory for saving the dataframe (default is 'neighbor_info/').    
 
-    Returns:
-        list: A list containing the closest distance between each cell in the DataFrame.
+    Returns
+        list
+            A list containing the closest distance between each cell in the DataFrame.
     """
 
     # Calcuate minimum distance between cells to determine the radius value
@@ -115,18 +134,26 @@ def calculate_closest_distance(df:pd.DataFrame):
     plt.title('Distribution of the closest distance')
     plt.show()   
 
+    # Check if saving is requested
+    if save == True:
+        if not os.path.exists(root):
+            os.makedirs(root)  
+        fig.savefig(root+'closest_distance_distribution.pdf', bbox_inches='tight')
+
     return closest_distances
 
 
-def get_neighbors(matrix:csr_matrix):
+def get_neighbors(matrix):
     """
     Calculate the number of neighbors for each cell.
 
-    Parameters:
-        matrix (sparse matrix): Spatial connectivity matrix.
+    Parameters
+        matrix 
+            Spatial connectivity matrix (sparse matrix).
 
-    Returns:
-        neiNum (Counter): Counter object containing the count of neighbors for each cell.
+    Returns
+        neiNum
+            Counter object containing the count of neighbors for each cell.
     """
     
     # Calculate the number of neighbors for each cell
@@ -135,19 +162,25 @@ def get_neighbors(matrix:csr_matrix):
     return neiNum
 
 
-def process_dataframe(df:pd.DataFrame, matrix:csr_matrix, neiNum:Counter, save:bool, root ='neighbor_info/'):
+def process_dataframe(df, matrix, neiNum, save:bool, root ='neighbor_info/'):
     """
-    Processes the dataframe by adding additional columns based on the neighbor matrix and neighbor counts.
+    Process the dataframe by adding additional columns based on the neighbor matrix and neighbor counts.
 
-    Parameters:
-        - df (DataFrame): The input dataframe containing the barcode, cell type, coordinates, and other information.
-        - matrix (sparse matrix): The neighbor matrix representing the spatial connectivities.
-        - neiNum (Counter): The neighbor counts for each cell index.
-        - save (bool): Flag indicating whether to save the processed dataframe.
-        - root (str): Root directory for saving the dataframe (default is 'neighbor_info/').
+    Parameters
+        df 
+            The input dataframe containing the barcode, cell type, coordinates, and other information.
+        matrix 
+            The neighbor matrix representing the spatial connectivities (sparse matrix).
+        neiNum 
+            Counter object containing the count of neighbors for each cell.
+        save (bool)
+            Flag indicating whether to save the processed dataframe.
+        root
+            Root directory for saving the dataframe (default is 'neighbor_info/').
 
-    Returns:
-        - df (DataFrame): The processed dataframe with additional columns for neighbor information.
+    Returns
+        df
+            The processed dataframe with additional columns for neighbor information.
     """
     
     # Add 'neiNum' column with neighbor counts
@@ -178,12 +211,15 @@ def process_dataframe(df:pd.DataFrame, matrix:csr_matrix, neiNum:Counter, save:b
         """
         Retrieve the neighboring cell type based on the neighbor types and current cell type.
 
-        Parameters:
-            neiType (str): Neighbor types.
-            celltype1 (str): Current cell type.
+        Parameters
+            neiType 
+                Neighbor types.
+            celltype1 
+                Current cell type.
 
-        Returns:
-            celltype2 (str): Neighboring cell type.
+        Returns
+            celltype2 
+                Neighboring cell type.
         """
         
         # Extract neighboring cell type from the list
@@ -205,11 +241,13 @@ def process_dataframe(df:pd.DataFrame, matrix:csr_matrix, neiNum:Counter, save:b
     df['celltype2'] = df['celltype2'].astype('category')
     df['second_type'] = df['celltype2'].cat.codes
 
-    # Replace spaces and slashes in cell type columns
+    # Replace spaces, slashes, and underscores in cell type columns
     df['celltype1'] = df['celltype1'].str.replace(' ', '-')
     df['celltype1'] = df['celltype1'].str.replace('/', '-')
+    df['celltype1'] = df['celltype1'].str.replace('_', '-')
     df['celltype2'] = df['celltype2'].str.replace(' ', '-')
     df['celltype2'] = df['celltype2'].str.replace('/', '-')
+    df['celltype2'] = df['celltype2'].str.replace('_', '-')
 
     # Drop multiple columns
     columns_to_drop = ['neiNum', 'neiType', 'catNum']

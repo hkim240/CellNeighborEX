@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CellNeighborEX.visualization.get_spatialPlot &mdash; CellNeighborEX 0.0.5 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/sg_gallery.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=282f96c0"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorials" href="../tutorials.html" />
+    <link rel="prev" title="CellNeighborEX.visualization.set_parameters" href="CellNeighborEX.visualization.set_parameters.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            CellNeighborEX
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html">API</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api.html#immediate-neighbor-detection">Immediate neighbor detection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#cell-type-categorization">Cell type categorization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../api.html#neighbor-dependent-gene-expression-analysis">Neighbor-dependent gene expression analysis</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../api.html#spatial-visualization">Spatial visualization</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="CellNeighborEX.visualization.import_expdata.html">CellNeighborEX.visualization.import_expdata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="CellNeighborEX.visualization.set_parameters.html">CellNeighborEX.visualization.set_parameters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">CellNeighborEX.visualization.get_spatialPlot</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#CellNeighborEX.visualization.get_spatialPlot"><code class="docutils literal notranslate"><span class="pre">get_spatialPlot()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorials.html">Tutorials</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CellNeighborEX</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../api.html">API</a></li>
+      <li class="breadcrumb-item active">CellNeighborEX.visualization.get_spatialPlot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/api/CellNeighborEX.visualization.get_spatialPlot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="cellneighborex-visualization-get-spatialplot">
+<h1>CellNeighborEX.visualization.get_spatialPlot<a class="headerlink" href="#cellneighborex-visualization-get-spatialplot" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="CellNeighborEX.visualization.get_spatialPlot">
+<span class="sig-prename descclassname"><span class="pre">CellNeighborEX.visualization.</span></span><span class="sig-name descname"><span class="pre">get_spatialPlot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df_bg</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_red</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_blue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">df_black</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_red</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_blue</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_black</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">label_gene</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figsize</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">root</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spatialMap/'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zorder_red</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zorder_blue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">zorder_black</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#CellNeighborEX.visualization.get_spatialPlot" title="Link to this definition"></a></dt>
+<dd><p>Generate a spatial plot using the provided DataFrames and parameters.</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Parameters</dt><dd><dl class="simple">
+<dt>df_bg </dt><dd><p>DataFrame for the background.</p>
+</dd>
+<dt>df_red </dt><dd><p>DataFrame for cells of type red.</p>
+</dd>
+<dt>df_blue </dt><dd><p>DataFrame for cells of type blue.</p>
+</dd>
+<dt>df_black </dt><dd><p>DataFrame for cells of type black.</p>
+</dd>
+<dt>label_red (str) </dt><dd><p>Label for cells of type red in the legend.</p>
+</dd>
+<dt>label_blue (str)</dt><dd><p>Label for cells of type blue in the legend.</p>
+</dd>
+<dt>label_black (str)</dt><dd><p>Label for cells of type black in the legend.</p>
+</dd>
+<dt>label_gene (str)</dt><dd><p>Label for the gene expression in the colorbar title.</p>
+</dd>
+<dt>zorder_red (float)</dt><dd><p>drawing order for cells of type red (default is 2.0).</p>
+</dd>
+<dt>zorder_blue (float)</dt><dd><p>drawing order for cells of type blue (default is 2.0).</p>
+</dd>
+<dt>zorder_black (float)</dt><dd><p>drawing order for cells of type black (default is 2.0).</p>
+</dd>
+<dt>figsize (tuple)</dt><dd><p>Size of the figure (width, height).</p>
+</dd>
+<dt>save (bool)</dt><dd><p>Flag indicating whether to save the plot.</p>
+</dd>
+<dt>root </dt><dd><p>Root directory for saving the plot.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="simple">
+<dt>Returns</dt><dd><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CellNeighborEX.visualization.set_parameters.html" class="btn btn-neutral float-left" title="CellNeighborEX.visualization.set_parameters" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../tutorials.html" class="btn btn-neutral float-right" title="Tutorials" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Hyobin Kim.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

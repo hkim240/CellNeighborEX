@@ -3,18 +3,24 @@ import pandas as pd
 from collections import Counter
 
 
-def generate_input_files(data_type:str, df:pd.DataFrame, sample_size=30, min_sample_size=1, root ='categorized_data/'):
+def generate_input_files(data_type, df, sample_size=30, min_sample_size=1, root ='categorized_data/'):
     """
     Generate input files for DEG analysis based on the given data.
 
-    Paremeters:
-        data_type: Type of data ('Image' or 'NGS').
-        df (pandas.DataFrame): The input DataFrame containing the data.
-        sample_size (int, optional): The cutoff for the number of heterogeneous spots to consider. Default is 30.
-        min_sample_size (int, optional): The minimum sample size required for processing. Default is 1.
-        root (str): Root directory for saving the plot.
+    Paremeters
+        data_type
+            Type of data ('Image' or 'NGS').
+        df 
+            The input DataFrame containing the data.
+        sample_size 
+            The cutoff for the number of heterogeneous spots to consider. Default is 30.
+        min_sample_size 
+            The minimum sample size required for processing. Default is 1.
+        root
+            Root directory for saving the plot.
+        
 
-    Returns:
+    Returns
         None        
     """
 
