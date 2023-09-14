@@ -1,5 +1,6 @@
-sphinx>=5.1.1
+Sphinx>=5.1.1
 ipykernel
+sphinx-rtd-theme
 nbsphinx
 sphinx_gallery
 CellNeighborEX
