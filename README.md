@@ -23,7 +23,7 @@ pip install CellNeighborEX
 </code></pre>
 
 ## Python API documentation and tutorials
-Please see this [Read the Docs pages](https://CellNeighborEX.readthedocs.io/en/latest/). 
+Please see this [Read the Docs](https://CellNeighborEX.readthedocs.io/en/latest/). 
 
 ## Citation
 Hyobin Kim, Amit Kumar, Cecilia Lövkvist, António M. Palma, Patrick Martin, Junil Kim, Praveen Bhoopathi, Jose Trevino, Paul Fisher, Esha Madan, Rajan Gogna, and Kyoung Jae Won, CellNeighborEX: Deciphering Neighbor-Dependent Gene Expression from Spatial Transcriptomics Data, [bioRxiv](https://www.biorxiv.org/content/10.1101/2022.02.16.480673v2).
