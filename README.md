@@ -26,4 +26,4 @@ pip install CellNeighborEX
 Please see this [Read the Docs](https://CellNeighborEX.readthedocs.io/en/latest/). 
 
 ## Citation
-Hyobin Kim, Amit Kumar, Cecilia Lövkvist, António M. Palma, Patrick Martin, Junil Kim, Praveen Bhoopathi, Jose Trevino, Paul Fisher, Esha Madan, Rajan Gogna, and Kyoung Jae Won, CellNeighborEX: Deciphering Neighbor-Dependent Gene Expression from Spatial Transcriptomics Data, Molecular Systems Biology, 19(11), e11670, 2023. [Link](https://doi.org/10.15252/msb.202311670).
+Hyobin Kim, Amit Kumar, Cecilia Lövkvist, António M. Palma, Patrick Martin, Junil Kim, Praveen Bhoopathi, Jose Trevino, Paul Fisher, Esha Madan, Rajan Gogna, and Kyoung Jae Won, CellNeighborEX: Deciphering Neighbor-Dependent Gene Expression from Spatial Transcriptomics Data, _Molecular Systems Biology_, 19(11), e11670, 2023. [Link](https://doi.org/10.15252/msb.202311670).
