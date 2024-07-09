@@ -1,4 +1,5 @@
 import os
+import shutil
 import pandas as pd
 from collections import Counter
 
@@ -45,8 +46,15 @@ def generate_input_files(data_type, df, sample_size=30, min_sample_size=1, root 
     counter_doublets = Counter(df['value'])
     sorted_counter = sorted(counter_doublets.items(), key=lambda x: x[1], reverse=True)
 
+    # Check if the folder already exists
     if not os.path.exists(root):
-            os.makedirs(root) 
+        # If it doesn't exist, create the folder
+        os.makedirs(root)
+    else:
+        # If it exists, remove the folder and its contents
+        shutil.rmtree(root) 
+        # create the folder
+        os.makedirs(root)       
             
     doublet_type = []
     for i in range(len(sorted_counter)):

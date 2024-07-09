@@ -257,9 +257,14 @@ def find_nullDEGs(center_celltype, clusterSelect, matchComb, neiCombUnique, log_
                 else: 
                     # Wilcoxon rank sum test
                     _, p = ranksums(log_data_artificialHeteroSpots.loc[i, :], log_data.loc[i, cellSelect1])  
-                    
+        
+        else:
+            print("For the normality test, please set the min_sample_size to a value larger than 3 in CellNeigbhorEX.categorization.generate_input_files.")
+                        
         pvalue[i] = p # Assign calculated p-value to array.
-        logRatio[i] = np.mean(log_data.loc[i, cellSelect1] + 1) - np.mean(log_data_artificialHeteroSpots.loc[i, :] + 1) # Calculate log ratio and assign it to array.
+        mean_log_data = np.mean(log_data.loc[i, cellSelect1] + 1)
+        mean_log_data_artificialHeteroSpots = np.mean(log_data_artificialHeteroSpots.loc[i, :] + 1)
+        logRatio[i] = np.log(mean_log_data / mean_log_data_artificialHeteroSpots)  # Calculate log ratio and assign it to array.
         
     _, fdr, _, _ = multipletests(pvalue, method='fdr_tsbh', alpha=0.15) # Adjust p-values using the Benjamini-Hochberg procedure.
 
@@ -458,7 +463,9 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
                     # Wilcoxon rank sum test
                     _, p = ranksums(log_data.loc[i, cellSelect2], log_data.loc[i, cellSelect1])
             pvalue1[i] = p
-            logRatio1[i] = np.mean(log_data.loc[i, cellSelect1] + 1) - np.mean(log_data.loc[i, cellSelect2] + 1)
+            mean_log_data_a1 = np.mean(log_data.loc[i, cellSelect1] + 1)
+            mean_log_data_a2 = np.mean(log_data.loc[i, cellSelect2] + 1)
+            logRatio1[i] =  np.log(mean_log_data_a1 / mean_log_data_a2) 
         
         if data_type == 'NGS':
             
@@ -497,7 +504,9 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
                         _, p2 = ranksums(log_data.loc[i, cellSelect3], log_data.loc[i, cellSelect1])
                 
                 pvalue2[i] = p2
-                logRatio2[i] = np.mean(log_data.loc[i, cellSelect1] + 1) - np.mean(log_data.loc[i, cellSelect3] + 1)
+                mean_log_data_b1 = np.mean(log_data.loc[i, cellSelect1] + 1)
+                mean_log_data_b2 = np.mean(log_data.loc[i, cellSelect3] + 1)
+                logRatio2[i] =  np.log(mean_log_data_b1 / mean_log_data_b2) 
             
     _, fdr1, _, _ = multipletests(pvalue1, method='fdr_tsbh', alpha=0.15) # Adjust p-values using the Benjamini-Hochberg procedure.
     
@@ -556,7 +565,10 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
             DEGindex = np.zeros((gene_name.shape[0], max_leng))
             
         geneIndexTemp2 = np.where(DEGindex == 1)[0]  # Get indices of significant DEGs. 
-        temp_DEGs = list(gene_name[0][geneIndexTemp2])  # Get names of DEGs.
+        if len(geneIndexTemp2) != 0 :
+            temp_DEGs = list(gene_name[0][geneIndexTemp2])  # Get names of DEGs. 
+        else:
+            temp_DEGs = []
     
         # Confirming the significance of DEGs: intersection between DEGx and DEGy
         # DEGx (null_DEGs): DEGs identified from the null model
@@ -750,32 +762,34 @@ def get_heatmap(data_type, center_celltype, clusterSelect, matchComb, neiCombUni
             # Save the integrated DataFrame to a CSV file with the specified filename in folderName2
             integrated.to_csv(f"{folderName2}/{filename}", header=None, index=False)
 
-        # Create an array of selected cells indices
-        cellSelect3_IDX = np.where(cellSelect3)
-        cellSelect3_array = np.array(cellSelect3_IDX[0], dtype=str)
-        for i in range(cellContact_DEGs_IDX.shape[0]): # Loop over the indices of DEGs
-                
-                # Create a filename for saving the data
-                filename = f"{neiCombUnique[2]}_{gene_name[0][cellContact_DEGs_IDX[i]]}.txt"
-                
-                # Extract relevant data for saving
-                log_values = log_data.loc[cellContact_DEGs_IDX[i]][cellSelect3_array]
-                zvalues = log_data_zvalue.loc[cellContact_DEGs_IDX[i]][cellSelect3_array]
-                barcodes = cell_id[0][np.array(cellSelect3_IDX[0])]
-                
-                # Stack the data vertically
-                integrated = np.vstack((barcodes, log_values, zvalues)).T
-                
-                # Sort the integrated data
-                integrated = integrated[integrated[:, 1].argsort()]
-                
-                # Convert the integrated data to a DataFrame
-                integrated = pd.DataFrame(integrated)
-                
-                # Save the integrated data to a CSV file
-                integrated.to_csv(f"{folderName2}/{filename}", header=None, index=False)
+        if data_type == 'Image':
+            
+            # Create an array of selected cells indices
+            cellSelect3_IDX = np.where(cellSelect3)
+            cellSelect3_array = np.array(cellSelect3_IDX[0], dtype=str)
+            for i in range(cellContact_DEGs_IDX.shape[0]): # Loop over the indices of DEGs
+                    
+                    # Create a filename for saving the data
+                    filename = f"{neiCombUnique[2]}_{gene_name[0][cellContact_DEGs_IDX[i]]}.txt"
+                    
+                    # Extract relevant data for saving
+                    log_values = log_data.loc[cellContact_DEGs_IDX[i]][cellSelect3_array]
+                    zvalues = log_data_zvalue.loc[cellContact_DEGs_IDX[i]][cellSelect3_array]
+                    barcodes = cell_id[0][np.array(cellSelect3_IDX[0])]
+                    
+                    # Stack the data vertically
+                    integrated = np.vstack((barcodes, log_values, zvalues)).T
+                    
+                    # Sort the integrated data
+                    integrated = integrated[integrated[:, 1].argsort()]
+                    
+                    # Convert the integrated data to a DataFrame
+                    integrated = pd.DataFrame(integrated)
+                    
+                    # Save the integrated data to a CSV file
+                    integrated.to_csv(f"{folderName2}/{filename}", header=None, index=False)
 
-        if data_type == 'NGS': # Checks if the data type is 'NGS'
+        elif data_type == 'NGS': # Checks if the data type is 'NGS'
             
             # Create a subplot at position (3,3,3)
             plt.subplot(3,3,3)
@@ -1189,16 +1203,19 @@ def analyze_data(df_cell_id, df_gene_name, df_log_data, path_categorization, dat
             null_DEGs, logRatio_null, pvalue_null, fdr_null, logRatio_null_total, fdr_null_total  = find_nullDEGs(center_celltype, clusterSelect, matchComb, neiCombUnique, log_data, log_data_artificialHeteroSpots, gene_name, pCutoff, pCutoff2, lrCutoff, direction, normality_test)
                                                                             
             if len(null_DEGs) > 0:
-                os.makedirs(folderName2, exist_ok=True)
-                save_path = os.path.join(folderName2, center_celltype +'_stat_null_cotact_genes.csv')
+                
+                #save_path = os.path.join(folderName2, center_celltype +'_stat_null_cotact_genes.csv')
                 df_null = pd.DataFrame({'null_DEGs': null_DEGs, 'pvalue_null': pvalue_null, 'fdr_null': fdr_null, 'logRatio_null': logRatio_null})
                 
-                save_path2 = os.path.join(folderName2, center_celltype +'_stat_null_total_genes.csv')
+                #save_path2 = os.path.join(folderName2, center_celltype +'_stat_null_total_genes.csv')
                 df_null2 = pd.DataFrame({'gene': list(gene_name[0]),'logRatio_null': logRatio_null_total, 'fdr_null': fdr_null_total})
                 
                 cellContact_DEGs_IDX, cellContact_DEGs, logRatio1_cellContact, pvalue1_cellContact, fdr1_cellContact, logRatio2_cellContact, pvalue2_cellContact, fdr2_cellContact, logRatio_null_cellContact, fdr_null_cellContact, logRatio1_total, pvalue1_total, fdr1_total, logRatio2_total, pvalue2_total, fdr2_total = find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCombUnique, log_data, gene_name, pCutoff, pCutoff2, lrCutoff, null_DEGs, df_null['fdr_null'], df_null['logRatio_null'], direction, normality_test)
                 
                 if len(cellContact_DEGs) > 0:
+                    
+                    os.makedirs(folderName2, exist_ok=True)
+                    
                     save_path = os.path.join(folderName2, center_celltype +'_stat_contact_DEGs.csv')
                     df = pd.DataFrame({'cellContact_DEGs_IDX': cellContact_DEGs_IDX, 'cellContact_DEGs': cellContact_DEGs, 'pvalue1_cellContact': pvalue1_cellContact, 'fdr1_cellContact': fdr1_cellContact, 'logRatio1_cellContact': logRatio1_cellContact, 'pvalue2_cellContact': pvalue2_cellContact, 'fdr2_cellContact': fdr2_cellContact, 'logRatio2_cellContact': logRatio2_cellContact})
                     df.to_csv(save_path, index=False)

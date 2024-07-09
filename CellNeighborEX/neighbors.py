@@ -30,7 +30,9 @@ def create_dataframe(adata, coord_key, celltype_key):
     """
 
     # Create a DataFrame for barcode
-    df_barcode = pd.DataFrame(adata.obs.index, columns=["barcode"])
+    index_name = adata.obs.index.name
+    df_barcode = pd.DataFrame(adata.obs.index, columns=[index_name])
+    df_barcode = df_barcode.rename(columns={index_name: 'barcode'})
 
     # Create a DataFrame for cell type
     df_celltype = pd.DataFrame(adata.obs[celltype_key])
@@ -237,6 +239,7 @@ def process_dataframe(df, matrix, neiNum, save:bool, root ='neighbor_info/'):
             df['celltype2'][i] = get_neighboring_cell_type(neiType=df['neiType'][i], celltype1=df['celltype1'][i])
 
     # Assign integer codes to 'first_type' and 'second_type' columns
+    df['celltype1'] = df['celltype1'].astype('category')
     df['first_type'] = df['celltype1'].cat.codes
     df['celltype2'] = df['celltype2'].astype('category')
     df['second_type'] = df['celltype2'].cat.codes
