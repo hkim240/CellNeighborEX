@@ -21,7 +21,7 @@ import CellNeighborEX
 project = 'CellNeighborEX'
 copyright = '2023, Hyobin Kim'
 author = 'Hyobin Kim'
-release = '0.0.5'
+release = '1.0.1'
 
 # -- General configuration ---------------------------------------------------
 # Add any Sphinx extension module names here, as strings. They can be

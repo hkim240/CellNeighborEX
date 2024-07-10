@@ -102,6 +102,7 @@
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">import</span> <span class="nn">os</span>
 </pre></div>
 </div>
@@ -121,7 +122,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Version: 0.0.5
+Version: 1.0.1
 </pre></div></div>
 </div>
 </section>
@@ -144,7 +145,7 @@ Version: 0.0.5
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;/Users/kimh15/Downloads&#39;
+&#39;/Users/kimh15/test/docs/source/tutorials&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -157,101 +158,45 @@ Version: 0.0.5
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download data files.</span>
-<span class="c1"># (i) pre-processed expression data</span>
-<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42334083<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_log_data.txt
-<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42334077<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_cell_id.txt
-<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42334080<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_gene_name.txt
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_path</span><span class="p">):</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+        <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
 
-<span class="c1"># (ii) data of annotated cell types and spatial coordinates</span>
-<span class="o">!</span>wget<span class="w"> </span>https://figshare.com/ndownloader/files/42333705<span class="w"> </span>-O<span class="w"> </span>Datasets/SSliver_RCTD.csv
+<span class="c1"># Download pre-processed expression data</span>
+<span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;https://figshare.com/ndownloader/files/42334083&quot;</span><span class="p">,</span> <span class="s2">&quot;Datasets/SSliver_log_data.txt&quot;</span><span class="p">)</span>
+<span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;https://figshare.com/ndownloader/files/42334077&quot;</span><span class="p">,</span> <span class="s2">&quot;Datasets/SSliver_cell_id.txt&quot;</span><span class="p">)</span>
+<span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;https://figshare.com/ndownloader/files/42334080&quot;</span><span class="p">,</span> <span class="s2">&quot;Datasets/SSliver_gene_name.txt&quot;</span><span class="p">)</span>
+
+<span class="c1"># Download data of annotated cell types and spatial coordinates</span>
+<span class="n">download_file</span><span class="p">(</span><span class="s2">&quot;https://figshare.com/ndownloader/files/42333705&quot;</span><span class="p">,</span> <span class="s2">&quot;Datasets/SSliver_RCTD.csv&quot;</span><span class="p">)</span>
+
+<span class="c1"># The data can also be downloaded using the following method:</span>
+<span class="c1"># # (i) pre-processed expression data</span>
+<span class="c1"># !wget https://figshare.com/ndownloader/files/42334083 -O Datasets/SSliver_log_data.txt</span>
+<span class="c1"># !wget https://figshare.com/ndownloader/files/42334077 -O Datasets/SSliver_cell_id.txt</span>
+<span class="c1"># !wget https://figshare.com/ndownloader/files/42334080 -O Datasets/SSliver_gene_name.txt</span>
+
+<span class="c1"># # (ii) data of annotated cell types and spatial coordinates</span>
+<span class="c1"># !wget https://figshare.com/ndownloader/files/42333705 -O Datasets/SSliver_RCTD.csv</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
---2023-09-13 02:12:13--  https://figshare.com/ndownloader/files/42334083
-Resolving figshare.com (figshare.com)... 52.50.184.124, 52.215.42.80
-Connecting to figshare.com (figshare.com)|52.50.184.124|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334083/SSliver_log_data.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091214Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe513216564b9b845c0a59c8c95f69cb7094a2892a32a24f3176c0e3594aacee [following]
---2023-09-13 02:12:14--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334083/SSliver_log_data.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091214Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=fe513216564b9b845c0a59c8c95f69cb7094a2892a32a24f3176c0e3594aacee
-Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.21.218, 52.92.34.144, 52.218.28.107, ...
-Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.21.218|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 412576983 (393M) [text/plain]
-Saving to: ‘Datasets/SSliver_log_data.txt’
-
-Datasets/SSliver_lo 100%[===================&gt;] 393.46M  17.2MB/s    in 23s
-
-2023-09-13 02:12:39 (16.9 MB/s) - ‘Datasets/SSliver_log_data.txt’ saved [412576983/412576983]
-
---2023-09-13 02:12:39--  https://figshare.com/ndownloader/files/42334077
-Resolving figshare.com (figshare.com)... 52.215.42.80, 52.50.184.124
-Connecting to figshare.com (figshare.com)|52.215.42.80|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334077/SSliver_cell_id.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091240Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=b80473a58f3a5b9d112e060fb33b42a9a6fda43878149eb4c81b65c2141c3444 [following]
---2023-09-13 02:12:40--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334077/SSliver_cell_id.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091240Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=b80473a58f3a5b9d112e060fb33b42a9a6fda43878149eb4c81b65c2141c3444
-Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.92.2.112, 52.218.36.178, 52.218.96.250, ...
-Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.92.2.112|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 342615 (335K) [text/plain]
-Saving to: ‘Datasets/SSliver_cell_id.txt’
-
-Datasets/SSliver_ce 100%[===================&gt;] 334.58K   504KB/s    in 0.7s
-
-2023-09-13 02:12:42 (504 KB/s) - ‘Datasets/SSliver_cell_id.txt’ saved [342615/342615]
-
---2023-09-13 02:12:42--  https://figshare.com/ndownloader/files/42334080
-Resolving figshare.com (figshare.com)... 52.50.184.124, 52.215.42.80
-Connecting to figshare.com (figshare.com)|52.50.184.124|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334080/SSliver_gene_name.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091243Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a9344167a9779e0f875b25e5b6bb38f29bddc39d5957fda820f6ab0b00ab0c06 [following]
---2023-09-13 02:12:43--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42334080/SSliver_gene_name.txt?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091243Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=a9344167a9779e0f875b25e5b6bb38f29bddc39d5957fda820f6ab0b00ab0c06
-Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.0.43, 52.218.36.178, 52.218.96.250, ...
-Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.0.43|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 13897 (14K) [text/plain]
-Saving to: ‘Datasets/SSliver_gene_name.txt’
-
-Datasets/SSliver_ge 100%[===================&gt;]  13.57K  --.-KB/s    in 0.03s
-
-2023-09-13 02:12:44 (470 KB/s) - ‘Datasets/SSliver_gene_name.txt’ saved [13897/13897]
-
---2023-09-13 02:12:44--  https://figshare.com/ndownloader/files/42333705
-Resolving figshare.com (figshare.com)... 52.50.184.124, 52.215.42.80
-Connecting to figshare.com (figshare.com)|52.50.184.124|:443... connected.
-HTTP request sent, awaiting response... 302 Found
-Location: https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42333705/SSliver_RCTD.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091245Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=1282c94e22cab9508e0f4e016efe87a9011e759ec87d799e1e3c93f0cc67aaab [following]
---2023-09-13 02:12:45--  https://s3-eu-west-1.amazonaws.com/pfigshare-u-files/42333705/SSliver_RCTD.csv?X-Amz-Algorithm=AWS4-HMAC-SHA256&amp;X-Amz-Credential=AKIAIYCQYOYV5JSSROOA/20230913/eu-west-1/s3/aws4_request&amp;X-Amz-Date=20230913T091245Z&amp;X-Amz-Expires=10&amp;X-Amz-SignedHeaders=host&amp;X-Amz-Signature=1282c94e22cab9508e0f4e016efe87a9011e759ec87d799e1e3c93f0cc67aaab
-Resolving s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)... 52.218.30.19, 52.218.36.178, 52.218.26.35, ...
-Connecting to s3-eu-west-1.amazonaws.com (s3-eu-west-1.amazonaws.com)|52.218.30.19|:443... connected.
-HTTP request sent, awaiting response... 200 OK
-Length: 1633094 (1.6M) [text/csv]
-Saving to: ‘Datasets/SSliver_RCTD.csv’
-
-Datasets/SSliver_RC 100%[===================&gt;]   1.56M  1.61MB/s    in 1.0s
-
-2023-09-13 02:12:47 (1.61 MB/s) - ‘Datasets/SSliver_RCTD.csv’ saved [1633094/1633094]
-
-</pre></div></div>
 </div>
 </section>
 <section id="Load-data">
 <h2>Load data<a class="headerlink" href="#Load-data" title="Link to this heading"></a></h2>
+<p>The ‘SSliver_RCTD.csv’ file was generated from RCTD deconvolution results. In this file, ‘first_type’ and ‘second_type’ numerically represent the cell types specified in ‘celltype1’ and ‘celltype2’, respectively. When RCTD classifies a spot as a singlet, both ‘cell type1’ (‘first_type’) and ‘cell type2’ (‘second_type’) must be set to the same value, necessitating the duplication of ‘first_type’ into ‘second_type’. Additionally, it is not necessary for the sum of ‘prop1’ and ‘prop2’ to equal 1,
+as the CellNeighborEX code includes a feature to normalize these proportions so that their total equals 1.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the path of data files regarding annotated cell types.</span>
-<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/Datasets/&#39;</span>
+<span class="n">path</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/test/docs/source/tutorials/Datasets/&#39;</span>
 <span class="n">df_processed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s1">&#39;SSliver_RCTD.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -382,7 +327,7 @@ Datasets/SSliver_RC 100%[===================&gt;]   1.56M  1.61MB/s    in 1.0s
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the path of the directory where all the categorized data files are saved.</span>
-<span class="n">path_categorization</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/categorized_data/&#39;</span>
+<span class="n">path_categorization</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/test/docs/source/tutorials/categorized_data/&#39;</span>
 </pre></div>
 </div>
 </div>
@@ -649,9 +594,9 @@ neighbor-dependent gene expression analysis:   0%|          | 0/26 [00:00&lt;?, 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:   4%|▍         | 1/26 [00:08&lt;03:24,  8.17s/it]
+neighbor-dependent gene expression analysis:   4%|▍         | 1/26 [00:02&lt;01:11,  2.86s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -667,44 +612,9 @@ neighbor-dependent gene expression analysis:   4%|▍         | 1/26 [00:08&lt;0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_5.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_5.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_7.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_7.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:   8%|▊         | 2/26 [00:21&lt;04:23, 10.99s/it]
+neighbor-dependent gene expression analysis:   8%|▊         | 2/26 [00:10&lt;02:17,  5.72s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -720,9 +630,9 @@ neighbor-dependent gene expression analysis:   8%|▊         | 2/26 [00:21&lt;0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  12%|█▏        | 3/26 [00:27&lt;03:24,  8.89s/it]
+neighbor-dependent gene expression analysis:  12%|█▏        | 3/26 [00:18&lt;02:37,  6.84s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -738,44 +648,9 @@ neighbor-dependent gene expression analysis:  12%|█▏        | 3/26 [00:27&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_13.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_13.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_15.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_15.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  15%|█▌        | 4/26 [00:35&lt;03:11,  8.69s/it]
+neighbor-dependent gene expression analysis:  15%|█▌        | 4/26 [00:21&lt;01:51,  5.07s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -791,44 +666,9 @@ neighbor-dependent gene expression analysis:  15%|█▌        | 4/26 [00:35&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_19.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_19.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_21.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_21.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  19%|█▉        | 5/26 [00:44&lt;03:05,  8.83s/it]
+neighbor-dependent gene expression analysis:  19%|█▉        | 5/26 [00:23&lt;01:28,  4.22s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -844,9 +684,9 @@ neighbor-dependent gene expression analysis:  19%|█▉        | 5/26 [00:44&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  23%|██▎       | 6/26 [00:47&lt;02:14,  6.71s/it]
+neighbor-dependent gene expression analysis:  23%|██▎       | 6/26 [00:28&lt;01:25,  4.26s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -862,9 +702,44 @@ neighbor-dependent gene expression analysis:  23%|██▎       | 6/26 [00:47&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  27%|██▋       | 7/26 [00:53&lt;02:02,  6.42s/it]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:939: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_15.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_15.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_17.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_17.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  27%|██▋       | 7/26 [00:35&lt;01:42,  5.41s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -880,44 +755,9 @@ neighbor-dependent gene expression analysis:  27%|██▋       | 7/26 [00:53&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_29.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_29.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_31.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_31.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  31%|███       | 8/26 [01:06&lt;02:31,  8.42s/it]
+neighbor-dependent gene expression analysis:  31%|███       | 8/26 [00:38&lt;01:20,  4.48s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -933,9 +773,9 @@ neighbor-dependent gene expression analysis:  31%|███       | 8/26 [01:06&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  35%|███▍      | 9/26 [01:14&lt;02:25,  8.55s/it]
+neighbor-dependent gene expression analysis:  35%|███▍      | 9/26 [00:45&lt;01:27,  5.15s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -951,9 +791,44 @@ neighbor-dependent gene expression analysis:  35%|███▍      | 9/26 [01:1
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  38%|███▊      | 10/26 [01:17&lt;01:48,  6.78s/it]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:939: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_25.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_25.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_27.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_27.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  38%|███▊      | 10/26 [00:55&lt;01:50,  6.90s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -969,39 +844,9 @@ neighbor-dependent gene expression analysis:  38%|███▊      | 10/26 [01:
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_39.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_39.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_41.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_41.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  42%|████▏     | 11/26 [01:29&lt;02:04,  8.33s/it]
+neighbor-dependent gene expression analysis:  42%|████▏     | 11/26 [00:58&lt;01:24,  5.61s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1017,9 +862,9 @@ neighbor-dependent gene expression analysis:  42%|████▏     | 11/26 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:939: SettingWithCopyWarning:
 A value is trying to be set on a copy of a slice from a DataFrame
 
 See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
@@ -1030,7 +875,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_45.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_45.png" />
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_33.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_33.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -1038,7 +883,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1046,7 +891,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_47.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_47.png" />
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_35.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_35.png" />
 </div>
 </div>
 <div class="nboutput docutils container">
@@ -1054,7 +899,7 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  46%|████▌     | 12/26 [01:39&lt;02:03,  8.85s/it]
+neighbor-dependent gene expression analysis:  46%|████▌     | 12/26 [01:10&lt;01:45,  7.57s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1070,9 +915,9 @@ neighbor-dependent gene expression analysis:  46%|████▌     | 12/26 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  50%|█████     | 13/26 [01:42&lt;01:30,  6.94s/it]
+neighbor-dependent gene expression analysis:  50%|█████     | 13/26 [01:13&lt;01:20,  6.16s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1088,9 +933,44 @@ neighbor-dependent gene expression analysis:  50%|█████     | 13/26 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  54%|█████▍    | 14/26 [01:45&lt;01:08,  5.72s/it]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:939: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_41.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_41.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_43.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_43.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  54%|█████▍    | 14/26 [01:22&lt;01:22,  6.86s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1106,9 +986,39 @@ neighbor-dependent gene expression analysis:  54%|█████▍    | 14/26 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  58%|█████▊    | 15/26 [01:47&lt;00:53,  4.83s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_47.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_47.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_49.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_49.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  58%|█████▊    | 15/26 [01:29&lt;01:17,  7.07s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1124,9 +1034,39 @@ neighbor-dependent gene expression analysis:  58%|█████▊    | 15/26 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  62%|██████▏   | 16/26 [01:54&lt;00:54,  5.49s/it]
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_53.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_53.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_55.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_55.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  62%|██████▏   | 16/26 [01:49&lt;01:48, 10.86s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1142,9 +1082,44 @@ neighbor-dependent gene expression analysis:  62%|██████▏   | 16/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  65%|██████▌   | 17/26 [01:57&lt;00:42,  4.72s/it]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:939: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_59.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_59.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_61.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_61.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  65%|██████▌   | 17/26 [02:01&lt;01:41, 11.33s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1160,9 +1135,9 @@ neighbor-dependent gene expression analysis:  65%|██████▌   | 17/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  69%|██████▉   | 18/26 [02:05&lt;00:44,  5.62s/it]
+neighbor-dependent gene expression analysis:  69%|██████▉   | 18/26 [02:08&lt;01:20, 10.01s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1178,9 +1153,9 @@ neighbor-dependent gene expression analysis:  69%|██████▉   | 18/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  73%|███████▎  | 19/26 [02:10&lt;00:37,  5.41s/it]
+neighbor-dependent gene expression analysis:  73%|███████▎  | 19/26 [02:15&lt;01:02,  8.94s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1196,9 +1171,9 @@ neighbor-dependent gene expression analysis:  73%|███████▎  | 19
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  77%|███████▋  | 20/26 [02:17&lt;00:34,  5.83s/it]
+neighbor-dependent gene expression analysis:  77%|███████▋  | 20/26 [02:17&lt;00:42,  7.05s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1214,9 +1189,9 @@ neighbor-dependent gene expression analysis:  77%|███████▋  | 20
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  81%|████████  | 21/26 [02:19&lt;00:24,  4.90s/it]
+neighbor-dependent gene expression analysis:  81%|████████  | 21/26 [02:22&lt;00:32,  6.51s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1232,39 +1207,9 @@ neighbor-dependent gene expression analysis:  81%|████████  | 21
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_69.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_69.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_71.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_71.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  85%|████████▍ | 22/26 [02:39&lt;00:37,  9.31s/it]
+neighbor-dependent gene expression analysis:  85%|████████▍ | 22/26 [02:28&lt;00:24,  6.24s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1280,9 +1225,9 @@ neighbor-dependent gene expression analysis:  85%|████████▍ | 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  88%|████████▊ | 23/26 [02:45&lt;00:25,  8.37s/it]
+neighbor-dependent gene expression analysis:  88%|████████▊ | 23/26 [02:34&lt;00:18,  6.23s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1298,9 +1243,44 @@ neighbor-dependent gene expression analysis:  88%|████████▊ | 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-neighbor-dependent gene expression analysis:  92%|█████████▏| 24/26 [02:52&lt;00:16,  8.01s/it]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:939: SettingWithCopyWarning:
+A value is trying to be set on a copy of a slice from a DataFrame
+
+See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
+  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_77.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_77.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_79.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_79.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+neighbor-dependent gene expression analysis:  92%|█████████▏| 24/26 [02:44&lt;00:14,  7.15s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1316,44 +1296,9 @@ neighbor-dependent gene expression analysis:  92%|█████████▏
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:925: SettingWithCopyWarning:
-A value is trying to be set on a copy of a slice from a DataFrame
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  df[&#39;largest_pvalue&#39;][i] = 0.0000000001
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_79.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_79.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_SSV2liver_cancer_21_81.png" src="../_images/tutorials_tutorial_SSV2liver_cancer_21_81.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  96%|█████████▌| 25/26 [03:03&lt;00:08,  8.91s/it]
+neighbor-dependent gene expression analysis:  96%|█████████▌| 25/26 [02:50&lt;00:06,  6.83s/it]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1369,7 +1314,7 @@ neighbor-dependent gene expression analysis:  96%|█████████▌
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1385,7 +1330,7 @@ neighbor-dependent gene expression analysis:  96%|█████████▌
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1401,7 +1346,7 @@ neighbor-dependent gene expression analysis:  96%|█████████▌
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis: 100%|██████████| 26/26 [03:11&lt;00:00,  7.38s/it]
+neighbor-dependent gene expression analysis: 100%|██████████| 26/26 [03:01&lt;00:00,  6.99s/it]
 </pre></div></div>
 </div>
 </section>
@@ -1413,7 +1358,7 @@ neighbor-dependent gene expression analysis: 100%|██████████
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a cell type and a DEG for spatial visualization and then load the data.</span>
 <span class="c1"># For example, F13a1 is one of up-regulated genes identified from the heterotypic spots of TumorIII+Monocyte.</span>
-<span class="n">path_selected</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/DE_results/TumorIII+Monocyte/&#39;</span>
+<span class="n">path_selected</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/test/docs/source/tutorials/DE_results/TumorIII+Monocyte/&#39;</span>
 <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;barcode&#39;</span><span class="p">,</span> <span class="s1">&#39;logdata&#39;</span><span class="p">,</span> <span class="s1">&#39;zscore&#39;</span><span class="p">]</span>
 <span class="n">heterotypic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;TumorIII+Monocyte_F13a1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
 <span class="n">homotypic1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;TumorIII+TumorIII_F13a1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>

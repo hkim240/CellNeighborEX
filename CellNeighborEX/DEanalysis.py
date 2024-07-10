@@ -262,9 +262,9 @@ def find_nullDEGs(center_celltype, clusterSelect, matchComb, neiCombUnique, log_
             print("For the normality test, please set the min_sample_size to a value larger than 3 in CellNeigbhorEX.categorization.generate_input_files.")
                         
         pvalue[i] = p # Assign calculated p-value to array.
-        mean_log_data = np.mean(log_data.loc[i, cellSelect1] + 1)
-        mean_log_data_artificialHeteroSpots = np.mean(log_data_artificialHeteroSpots.loc[i, :] + 1)
-        logRatio[i] = np.log(mean_log_data / mean_log_data_artificialHeteroSpots)  # Calculate log ratio and assign it to array.
+        mean_log_data = np.mean(log_data.loc[i, cellSelect1])
+        mean_log_data_artificialHeteroSpots = np.mean(log_data_artificialHeteroSpots.loc[i, :])
+        logRatio[i] = mean_log_data - mean_log_data_artificialHeteroSpots  # Calculate log ratio and assign it to array.
         
     _, fdr, _, _ = multipletests(pvalue, method='fdr_tsbh', alpha=0.15) # Adjust p-values using the Benjamini-Hochberg procedure.
 
@@ -463,9 +463,9 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
                     # Wilcoxon rank sum test
                     _, p = ranksums(log_data.loc[i, cellSelect2], log_data.loc[i, cellSelect1])
             pvalue1[i] = p
-            mean_log_data_a1 = np.mean(log_data.loc[i, cellSelect1] + 1)
-            mean_log_data_a2 = np.mean(log_data.loc[i, cellSelect2] + 1)
-            logRatio1[i] =  np.log(mean_log_data_a1 / mean_log_data_a2) 
+            mean_log_data_a1 = np.mean(log_data.loc[i, cellSelect1])
+            mean_log_data_a2 = np.mean(log_data.loc[i, cellSelect2])
+            logRatio1[i] =  mean_log_data_a1 - mean_log_data_a2
         
         if data_type == 'NGS':
             
@@ -504,9 +504,9 @@ def find_contactDEGs(data_type, center_celltype, clusterSelect, matchComb, neiCo
                         _, p2 = ranksums(log_data.loc[i, cellSelect3], log_data.loc[i, cellSelect1])
                 
                 pvalue2[i] = p2
-                mean_log_data_b1 = np.mean(log_data.loc[i, cellSelect1] + 1)
-                mean_log_data_b2 = np.mean(log_data.loc[i, cellSelect3] + 1)
-                logRatio2[i] =  np.log(mean_log_data_b1 / mean_log_data_b2) 
+                mean_log_data_b1 = np.mean(log_data.loc[i, cellSelect1])
+                mean_log_data_b2 = np.mean(log_data.loc[i, cellSelect3])
+                logRatio2[i] =  mean_log_data_b1 - mean_log_data_b2
             
     _, fdr1, _, _ = multipletests(pvalue1, method='fdr_tsbh', alpha=0.15) # Adjust p-values using the Benjamini-Hochberg procedure.
     

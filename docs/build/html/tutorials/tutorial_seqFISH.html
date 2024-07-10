@@ -124,7 +124,7 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Version: 0.0.5
+Version: 1.0.1
 </pre></div></div>
 </div>
 </section>
@@ -168,7 +168,7 @@ Version: 0.0.5
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-Calculating closest distances: 100%|██████████| 19416/19416 [05:33&lt;00:00, 58.16it/s]
+Calculating closest distances: 100%|██████████| 19416/19416 [05:51&lt;00:00, 55.25it/s]
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -193,7 +193,7 @@ Calculating closest distances: 100%|██████████| 19416/19416 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&#39;/Users/kimh15/Downloads&#39;
+&#39;/Users/kimh15/test/docs/source/tutorials&#39;
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -340,73 +340,18 @@ Calculating closest distances: 100%|██████████| 19416/19416 
 </pre></div>
 </div>
 </div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set the path of the directory where all the categorized data files are saved.</span>
-<span class="n">path_categorization</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/categorized_data/&#39;</span>
+<span class="n">path_categorization</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/test/docs/source/tutorials/categorized_data/&#39;</span>
 
 <span class="c1"># (Optional) Remove categorized data files with a specific keyword: this function can be used to exclude unwanted cell types.</span>
 <span class="n">specific_keyword</span> <span class="o">=</span> <span class="s1">&#39;Low-quality&#39;</span> <span class="c1"># In the seqFISH data, &#39;Low-quality&#39; is a unwanted cell type.</span>
 <span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">DEanalysis</span><span class="o">.</span><span class="n">delete_files_with_keyword</span><span class="p">(</span><span class="n">path_categorization</span><span class="p">,</span> <span class="n">specific_keyword</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Gut-tube+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Low-quality+Erythroid.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Low-quality+Erythroid.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Low-quality+Forebrain-Midbrain-Hindbrain.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Surface-ectoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Low-quality+Endothelium.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Low-quality+Spinal-cord.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Low-quality+Spinal-cord.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Low-quality+Endothelium.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Forebrain-Midbrain-Hindbrain+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Spinal-cord+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Splanchnic-mesoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Forebrain-Midbrain-Hindbrain+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Low-quality+Erythroid.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Surface-ectoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Erythroid+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Surface-ectoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Low-quality+Endothelium.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Low-quality+Spinal-cord.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Erythroid+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Splanchnic-mesoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Splanchnic-mesoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Low-quality+Forebrain-Midbrain-Hindbrain.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Erythroid+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Low-quality+Neural-crest.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Splanchnic-mesoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Forebrain-Midbrain-Hindbrain+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Surface-ectoderm+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Gut-tube+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Erythroid+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Neural-crest+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Spinal-cord+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Gut-tube+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Low-quality+Neural-crest.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Low-quality+Spinal-cord.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/neiCombUnique_categorized_Low-quality+Forebrain-Midbrain-Hindbrain.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Low-quality+Endothelium.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Neural-crest+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Low-quality+Forebrain-Midbrain-Hindbrain.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Neural-crest+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Low-quality+Neural-crest.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Forebrain-Midbrain-Hindbrain+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Spinal-cord+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Low-quality+Neural-crest.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/matchComb_categorized_Spinal-cord+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Gut-tube+Low-quality.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/prop_categorized_Low-quality+Erythroid.csv
-Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Neural-crest+Low-quality.csv
-</pre></div></div>
 </div>
 </section>
 <section id="Produce-log-normalized-expression-data">
@@ -428,8 +373,14 @@ Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Neural-
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the data into dataframes.</span>
+<span class="n">index_name</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span>
 <span class="n">df_cell_id</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">obs</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_cell_id</span> <span class="o">=</span> <span class="n">df_cell_id</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">index_name</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+
+<span class="n">var_name</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span>
 <span class="n">df_gene_name</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">adata</span><span class="o">.</span><span class="n">var</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">df_gene_name</span> <span class="o">=</span> <span class="n">df_gene_name</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="n">var_name</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+
 <span class="n">df_log_data</span> <span class="o">=</span> <span class="n">adata</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">to_df</span><span class="p">()</span>
 <span class="n">df_log_data</span> <span class="o">=</span> <span class="n">df_log_data</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="c1"># row indices are represented as numbers.</span>
 </pre></div>
@@ -668,7 +619,7 @@ Deleted file: /Users/kimh15/Downloads/categorized_data/index_categorized_Neural-
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:   0%|          | 0/24 [00:00&lt;?, ?it/s]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:   0%|          | 0/24 [00:00&lt;?, ?it/s]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -692,7 +643,7 @@ neighbor-dependent gene expression analysis:   0%|          | 0/24 [00:00&lt;?, 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -708,7 +659,7 @@ neighbor-dependent gene expression analysis:   0%|          | 0/24 [00:00&lt;?, 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:   4%|▍         | 1/24 [00:04&lt;01:46,  4.64s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:   4%|▍         | 1/24 [00:03&lt;01:09,  3.00s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -732,7 +683,7 @@ neighbor-dependent gene expression analysis:   4%|▍         | 1/24 [00:04&lt;0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -748,7 +699,7 @@ neighbor-dependent gene expression analysis:   4%|▍         | 1/24 [00:04&lt;0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:   8%|▊         | 2/24 [00:06&lt;01:04,  2.91s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:   8%|▊         | 2/24 [00:06&lt;01:07,  3.06s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -772,7 +723,7 @@ neighbor-dependent gene expression analysis:   8%|▊         | 2/24 [00:06&lt;0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -788,9 +739,7 @@ neighbor-dependent gene expression analysis:   8%|▊         | 2/24 [00:06&lt;0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  12%|█▎        | 3/24 [00:10&lt;01:09,  3.32s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
-  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  12%|█▎        | 3/24 [00:07&lt;00:53,  2.53s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -800,7 +749,6 @@ neighbor-dependent gene expression analysis:  12%|█▎        | 3/24 [00:10&lt
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 3
-4
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -815,7 +763,7 @@ neighbor-dependent gene expression analysis:  12%|█▎        | 3/24 [00:10&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -831,7 +779,7 @@ neighbor-dependent gene expression analysis:  12%|█▎        | 3/24 [00:10&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  21%|██        | 5/24 [00:13&lt;00:43,  2.30s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  17%|█▋        | 4/24 [00:09&lt;00:44,  2.21s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -840,7 +788,7 @@ neighbor-dependent gene expression analysis:  21%|██        | 5/24 [00:13&lt
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-5
+4
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -855,7 +803,7 @@ neighbor-dependent gene expression analysis:  21%|██        | 5/24 [00:13&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -871,7 +819,7 @@ neighbor-dependent gene expression analysis:  21%|██        | 5/24 [00:13&lt
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  25%|██▌       | 6/24 [00:15&lt;00:39,  2.17s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  21%|██        | 5/24 [00:12&lt;00:45,  2.39s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -880,7 +828,7 @@ neighbor-dependent gene expression analysis:  25%|██▌       | 6/24 [00:15&
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-6
+5
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -895,7 +843,7 @@ neighbor-dependent gene expression analysis:  25%|██▌       | 6/24 [00:15&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -911,7 +859,7 @@ neighbor-dependent gene expression analysis:  25%|██▌       | 6/24 [00:15&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  29%|██▉       | 7/24 [00:18&lt;00:41,  2.44s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  25%|██▌       | 6/24 [00:14&lt;00:43,  2.40s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -920,7 +868,7 @@ neighbor-dependent gene expression analysis:  29%|██▉       | 7/24 [00:18&
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-7
+6
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -935,7 +883,7 @@ neighbor-dependent gene expression analysis:  29%|██▉       | 7/24 [00:18&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -951,7 +899,7 @@ neighbor-dependent gene expression analysis:  29%|██▉       | 7/24 [00:18&
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  33%|███▎      | 8/24 [00:21&lt;00:42,  2.63s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  29%|██▉       | 7/24 [00:16&lt;00:36,  2.17s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -960,7 +908,7 @@ neighbor-dependent gene expression analysis:  33%|███▎      | 8/24 [00:2
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-8
+7
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -975,7 +923,7 @@ neighbor-dependent gene expression analysis:  33%|███▎      | 8/24 [00:2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -991,7 +939,7 @@ neighbor-dependent gene expression analysis:  33%|███▎      | 8/24 [00:2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  38%|███▊      | 9/24 [00:26&lt;00:50,  3.35s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  33%|███▎      | 8/24 [00:21&lt;00:49,  3.09s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1000,7 +948,7 @@ neighbor-dependent gene expression analysis:  38%|███▊      | 9/24 [00:2
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-9
+8
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1015,7 +963,7 @@ neighbor-dependent gene expression analysis:  38%|███▊      | 9/24 [00:2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1031,7 +979,7 @@ neighbor-dependent gene expression analysis:  38%|███▊      | 9/24 [00:2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  42%|████▏     | 10/24 [00:28&lt;00:40,  2.88s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  38%|███▊      | 9/24 [00:24&lt;00:46,  3.09s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1040,7 +988,7 @@ neighbor-dependent gene expression analysis:  42%|████▏     | 10/24 [0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-10
+9
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1055,7 +1003,7 @@ neighbor-dependent gene expression analysis:  42%|████▏     | 10/24 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1071,7 +1019,7 @@ neighbor-dependent gene expression analysis:  42%|████▏     | 10/24 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  46%|████▌     | 11/24 [00:30&lt;00:34,  2.69s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  42%|████▏     | 10/24 [00:26&lt;00:37,  2.70s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1080,7 +1028,7 @@ neighbor-dependent gene expression analysis:  46%|████▌     | 11/24 [0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-11
+10
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1095,7 +1043,7 @@ neighbor-dependent gene expression analysis:  46%|████▌     | 11/24 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1111,7 +1059,7 @@ neighbor-dependent gene expression analysis:  46%|████▌     | 11/24 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  50%|█████     | 12/24 [00:32&lt;00:31,  2.66s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  46%|████▌     | 11/24 [00:29&lt;00:35,  2.76s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1120,7 +1068,7 @@ neighbor-dependent gene expression analysis:  50%|█████     | 12/24 [0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-12
+11
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1135,7 +1083,7 @@ neighbor-dependent gene expression analysis:  50%|█████     | 12/24 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1151,7 +1099,7 @@ neighbor-dependent gene expression analysis:  50%|█████     | 12/24 [0
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  54%|█████▍    | 13/24 [00:34&lt;00:26,  2.44s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  50%|█████     | 12/24 [00:34&lt;00:40,  3.37s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1160,7 +1108,7 @@ neighbor-dependent gene expression analysis:  54%|█████▍    | 13/24 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-13
+12
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1175,7 +1123,7 @@ neighbor-dependent gene expression analysis:  54%|█████▍    | 13/24 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1191,7 +1139,7 @@ neighbor-dependent gene expression analysis:  54%|█████▍    | 13/24 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  58%|█████▊    | 14/24 [00:36&lt;00:22,  2.28s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  54%|█████▍    | 13/24 [00:38&lt;00:40,  3.66s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1200,7 +1148,7 @@ neighbor-dependent gene expression analysis:  58%|█████▊    | 14/24 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-14
+13
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1215,7 +1163,7 @@ neighbor-dependent gene expression analysis:  58%|█████▊    | 14/24 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1231,7 +1179,7 @@ neighbor-dependent gene expression analysis:  58%|█████▊    | 14/24 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  62%|██████▎   | 15/24 [00:41&lt;00:27,  3.03s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  58%|█████▊    | 14/24 [00:41&lt;00:33,  3.33s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1240,7 +1188,7 @@ neighbor-dependent gene expression analysis:  62%|██████▎   | 15/2
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-15
+14
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1255,7 +1203,7 @@ neighbor-dependent gene expression analysis:  62%|██████▎   | 15/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1271,7 +1219,7 @@ neighbor-dependent gene expression analysis:  62%|██████▎   | 15/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  67%|██████▋   | 16/24 [00:45&lt;00:27,  3.46s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  62%|██████▎   | 15/24 [00:42&lt;00:25,  2.81s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1280,7 +1228,7 @@ neighbor-dependent gene expression analysis:  67%|██████▋   | 16/2
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-16
+15
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1295,7 +1243,7 @@ neighbor-dependent gene expression analysis:  67%|██████▋   | 16/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1311,7 +1259,7 @@ neighbor-dependent gene expression analysis:  67%|██████▋   | 16/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  71%|███████   | 17/24 [00:48&lt;00:22,  3.18s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  67%|██████▋   | 16/24 [00:47&lt;00:26,  3.28s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1320,7 +1268,7 @@ neighbor-dependent gene expression analysis:  71%|███████   | 17/2
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-17
+16
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1335,7 +1283,7 @@ neighbor-dependent gene expression analysis:  71%|███████   | 17/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1351,7 +1299,7 @@ neighbor-dependent gene expression analysis:  71%|███████   | 17/2
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  75%|███████▌  | 18/24 [00:51&lt;00:19,  3.20s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  71%|███████   | 17/24 [00:50&lt;00:23,  3.40s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1360,24 +1308,23 @@ neighbor-dependent gene expression analysis:  75%|███████▌  | 18
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-18
+17
 </pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_seqFISH_24_87.png" src="../_images/tutorials_tutorial_seqFISH_24_87.png" />
+</div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  79%|███████▉  | 19/24 [00:52&lt;00:11,  2.38s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
-  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-19
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1392,23 +1339,9 @@ neighbor-dependent gene expression analysis:  79%|███████▉  | 19
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_seqFISH_24_91.png" src="../_images/tutorials_tutorial_seqFISH_24_91.png" />
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  83%|████████▎ | 20/24 [00:57&lt;00:12,  3.18s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  75%|███████▌  | 18/24 [00:53&lt;00:19,  3.28s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1417,7 +1350,24 @@ neighbor-dependent gene expression analysis:  83%|████████▎ | 
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-20
+18
+19
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutorials_tutorial_seqFISH_24_92.png" src="../_images/tutorials_tutorial_seqFISH_24_92.png" />
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
+  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -1432,23 +1382,24 @@ neighbor-dependent gene expression analysis:  83%|████████▎ | 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
-  plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
+neighbor-dependent gene expression analysis:  83%|████████▎ | 20/24 [00:58&lt;00:11,  2.80s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+  log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutorials_tutorial_seqFISH_24_96.png" src="../_images/tutorials_tutorial_seqFISH_24_96.png" />
-</div>
+<div class="highlight"><pre>
+20
+</pre></div></div>
 </div>
 <div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  88%|████████▊ | 21/24 [00:59&lt;00:09,  3.03s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  88%|████████▊ | 21/24 [00:58&lt;00:06,  2.22s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1472,7 +1423,7 @@ neighbor-dependent gene expression analysis:  88%|████████▊ | 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1488,7 +1439,7 @@ neighbor-dependent gene expression analysis:  88%|████████▊ | 
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  92%|█████████▏| 22/24 [01:01&lt;00:05,  2.66s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  92%|█████████▏| 22/24 [01:01&lt;00:04,  2.33s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1512,7 +1463,7 @@ neighbor-dependent gene expression analysis:  92%|█████████▏
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1528,7 +1479,7 @@ neighbor-dependent gene expression analysis:  92%|█████████▏
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis:  96%|█████████▌| 23/24 [01:04&lt;00:02,  2.70s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1131: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
+neighbor-dependent gene expression analysis:  96%|█████████▌| 23/24 [01:03&lt;00:02,  2.18s/it]/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:1145: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
   log_data_zvalue = (log_data_total - mean_values[:, np.newaxis]) / std_values[:, np.newaxis]
 </pre></div></div>
 </div>
@@ -1552,7 +1503,7 @@ neighbor-dependent gene expression analysis:  96%|█████████▌
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:660: UserWarning: FixedFormatter should only be used together with FixedLocator
+/opt/anaconda3/envs/CellNeighborEX-env/lib/python3.10/site-packages/CellNeighborEX/DEanalysis.py:672: UserWarning: FixedFormatter should only be used together with FixedLocator
   plt.gca().set_yticklabels(a, fontsize=12)  # Sets the y-axis tick labels with fontsize 12
 </pre></div></div>
 </div>
@@ -1568,7 +1519,7 @@ neighbor-dependent gene expression analysis:  96%|█████████▌
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-neighbor-dependent gene expression analysis: 100%|██████████| 24/24 [01:07&lt;00:00,  2.82s/it]
+neighbor-dependent gene expression analysis: 100%|██████████| 24/24 [01:05&lt;00:00,  2.72s/it]
 </pre></div></div>
 </div>
 </section>
@@ -1580,14 +1531,14 @@ neighbor-dependent gene expression analysis: 100%|██████████
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Select a cell type and a DEG for spatial visualization and then load the data.</span>
 <span class="c1"># For example, Pitx1 is up-regulated when Gut-tube are adjacent to Neural-crest.</span>
-<span class="n">path_selected</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/Downloads/DE_results/Gut-tube+Neural-crest/&#39;</span>
+<span class="n">path_selected</span> <span class="o">=</span> <span class="s1">&#39;/Users/kimh15/test/docs/source/tutorials/DE_results/Gut-tube+Neural-crest/&#39;</span>
 <span class="n">column_names</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;barcode&#39;</span><span class="p">,</span> <span class="s1">&#39;logdata&#39;</span><span class="p">,</span> <span class="s1">&#39;zscore&#39;</span><span class="p">]</span>
 <span class="n">heterotypic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;Gut-tube+Neural-crest_Pitx1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
 <span class="n">homotypic1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;Gut-tube+Gut-tube_Pitx1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
 <span class="n">homotypic2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path_selected</span> <span class="o">+</span> <span class="s2">&quot;Neural-crest+Neural-crest_Pitx1.txt&quot;</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="n">names</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">)</span>
 <span class="n">heterotypic</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Gut-tube+Neural-crest&#39;</span>
 <span class="n">homotypic1</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Gut-tube+Gut-tube&#39;</span>
-<span class="n">homotypic2</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Neural-crest&#39;</span>
+<span class="n">homotypic2</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Neural-crest+Neural-crest&#39;</span>
 <span class="n">df_exp</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">heterotypic</span><span class="p">,</span> <span class="n">homotypic1</span><span class="p">,</span> <span class="n">homotypic2</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -1597,7 +1548,7 @@ neighbor-dependent gene expression analysis: 100%|██████████
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set parameter values.</span>
-<span class="n">df_bg</span><span class="p">,</span> <span class="n">df_red</span><span class="p">,</span> <span class="n">df_blue</span><span class="p">,</span> <span class="n">df_black</span> <span class="o">=</span> <span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">set_parameters</span><span class="p">(</span><span class="n">df_processed</span><span class="p">,</span> <span class="n">df_exp</span><span class="p">,</span> <span class="n">beadsize_bg</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">edgecolor_bg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">),</span> <span class="n">beadcolor_bg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">),</span> <span class="n">beadsize_red</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">beadsize_blue</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">beadsize_black</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">type_red</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Neural-crest&#39;</span><span class="p">,</span> <span class="n">type_blue</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Gut-tube&#39;</span><span class="p">,</span> <span class="n">type_black</span><span class="o">=</span><span class="s1">&#39;Neural-crest&#39;</span><span class="p">)</span>
+<span class="n">df_bg</span><span class="p">,</span> <span class="n">df_red</span><span class="p">,</span> <span class="n">df_blue</span><span class="p">,</span> <span class="n">df_black</span> <span class="o">=</span> <span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">set_parameters</span><span class="p">(</span><span class="n">df_processed</span><span class="p">,</span> <span class="n">df_exp</span><span class="p">,</span> <span class="n">beadsize_bg</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">edgecolor_bg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">),</span> <span class="n">beadcolor_bg</span><span class="o">=</span><span class="p">(</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">,</span><span class="mf">0.85</span><span class="p">),</span> <span class="n">beadsize_red</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span> <span class="n">beadsize_blue</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">beadsize_black</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">type_red</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Neural-crest&#39;</span><span class="p">,</span> <span class="n">type_blue</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Gut-tube&#39;</span><span class="p">,</span> <span class="n">type_black</span><span class="o">=</span><span class="s1">&#39;Neural-crest+Neural-crest&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1608,7 +1559,7 @@ neighbor-dependent gene expression analysis: 100%|██████████
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the spatial map.</span>
 <span class="c1"># zorder_red, zorder_blue, and zorder_black are parameters that determine the drawing order in the spatial map.</span>
 <span class="c1"># If save=True, the spatial map (Pitx1.pdf) is saved in the &quot;spatialMap&quot; folder in the root directory.</span>
-<span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">get_spatialPlot</span><span class="p">(</span><span class="n">df_bg</span><span class="p">,</span> <span class="n">df_red</span><span class="p">,</span> <span class="n">df_blue</span><span class="p">,</span> <span class="n">df_black</span><span class="p">,</span> <span class="n">label_red</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Neural-crest&#39;</span><span class="p">,</span> <span class="n">label_blue</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Gut-tube&#39;</span><span class="p">,</span> <span class="n">label_black</span><span class="o">=</span><span class="s1">&#39;Neural-crest&#39;</span><span class="p">,</span> <span class="n">label_gene</span><span class="o">=</span><span class="s1">&#39;Pitx1&#39;</span><span class="p">,</span> <span class="n">zorder_red</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">zorder_blue</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">zorder_black</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">CellNeighborEX</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">get_spatialPlot</span><span class="p">(</span><span class="n">df_bg</span><span class="p">,</span> <span class="n">df_red</span><span class="p">,</span> <span class="n">df_blue</span><span class="p">,</span> <span class="n">df_black</span><span class="p">,</span> <span class="n">label_red</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Neural-crest&#39;</span><span class="p">,</span> <span class="n">label_blue</span><span class="o">=</span><span class="s1">&#39;Gut-tube+Gut-tube&#39;</span><span class="p">,</span> <span class="n">label_black</span><span class="o">=</span><span class="s1">&#39;Neural-crest+Neural-crest&#39;</span><span class="p">,</span> <span class="n">label_gene</span><span class="o">=</span><span class="s1">&#39;Pitx1&#39;</span><span class="p">,</span> <span class="n">zorder_red</span><span class="o">=</span><span class="mf">3.0</span><span class="p">,</span> <span class="n">zorder_blue</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="n">zorder_black</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">28</span><span class="p">),</span> <span class="n">save</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
