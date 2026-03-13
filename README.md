@@ -19,7 +19,7 @@ conda activate myenv
 pip install -r requirements.txt
 
 # Install CellNeighborEX from PyPI
-pip install CellNeighborEX
+pip install CellNeighborEX==1.0.1
 </code></pre>
 
 ## Python API documentation and tutorials
